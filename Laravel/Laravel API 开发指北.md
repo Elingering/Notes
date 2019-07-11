@@ -281,7 +281,7 @@ return UserResource::collection($users);
 
 ## Enum 枚举
 - 自己模拟app/Models/Enum/UserEnum.php
-- 使用第三方扩展（）//TODO
+- 使用第三方扩展（https://github.com/BenSampo/laravel-enum）
 
 ## 异常处理
 
