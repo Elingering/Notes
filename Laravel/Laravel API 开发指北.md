@@ -227,3 +227,10 @@ return $this->failed('用户登录失败',401,10001);
 ```
 
 ## Api-Resource 资源
+
+### 单一资源
+```php
+php artisan make:resource Api/UserResource
+
+
+```
