@@ -392,7 +392,37 @@ $ php artisan passport:client --password --name='larabbs-ios'
 ```
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/11/1562829422574-1562829422577.png?token=AFRM333WHG2ALM25YQPM34K5E3RKY)
 
-#### 
+#### 注册路由
+```php
+app/Providers/AuthServiceProvider.php
+
+use Laravel\Passport\Passport;
+
+public function boot()
+{
+    // Passport 的路由
+    Passport::routes();
+    // access_token 过期时间
+    Passport::tokensExpireIn(Carbon::now()->addDays(15));
+    // refreshTokens 过期时间
+    Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+}
+```
+
+#### 获取令牌
+密码模式我们通过 larabbs.test/oauth/token 这个路由获取访问令牌。提交的参数如下：
+- grant_type —— 密码模式固定为 password；
+- client_id —— 通过 passport:client 创建的客户端 id；
+- client_secret —— 通过 passport:client 创建的客户端 secret；
+- username —— 登录的用户名，数据库中任意用户邮箱；
+- password —— 用户密码；
+- scope —— 作用域，可填写 * 或者为空；
+
+返回数据：
+- token_type —— 令牌类型；
+- expires_in—— 多长时间后过期；
+- access_token —— 访问令牌；
+- refresh_token —— 刷新令牌；
 
 
 
