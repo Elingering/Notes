@@ -23,7 +23,7 @@ php artisan make:controller Api/UserController
 use Illuminate\Http\Request;
 
 Route::namespace('Api')->prefix('v1')->group(function () {
-        Route::get('/users','UserController@index')->name('users.index');
+    Route::get('/users','UserController@index')->name('users.index');
 });
 ```
 
@@ -33,4 +33,13 @@ Route::namespace('Api')->prefix('v1')->group(function () {
 php artisan make:request Api/FormRequest
 普通验证器
 php artisan make:request Api/UserRequest
+```
+
+## 使用name登录（默认是email）
+```php
+app/Http/Controllers/auth/LoginController.php 
+public function username()
+{
+    return 'name';
+}
 ```
