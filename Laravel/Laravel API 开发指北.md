@@ -611,5 +611,11 @@ config/auth.php
         // ],
     ],
 ```
-同User
+同User一样，copy一份Admin：
 - Admin 用户表
+- 框架文件：model、controller、request、resource...
+- copy一份认证中间件
+- 开始使用
+
+### 自动区分 guard
+
