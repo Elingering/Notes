@@ -660,6 +660,10 @@ trait PassportToken
 第三方登录中引入Trait，并使用
 $result = $this->getBearerTokenByUser($user, '1', false);
 ```
+代码有点多，不过我们只需要注意 getBearerTokenByUser 方法即可，该方法提供三个参数：
+- 用户实例；
+- Passport 客户端的 client_id；
+- 是否直接返回 Response；
 
 
 
