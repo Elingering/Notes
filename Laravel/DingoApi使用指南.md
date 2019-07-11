@@ -29,6 +29,9 @@ $ php artisan make:controller Api/Controller
 使用trait use Dingo\Api\Routing\Helpers;
 ```
 ### 返回信息
+```php
+
+```
 
 ## 路由管理
 ## Transform
