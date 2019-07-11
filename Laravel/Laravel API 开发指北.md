@@ -228,9 +228,53 @@ return $this->failed('用户登录失败',401,10001);
 
 ## Api-Resource 资源
 
-### 单一资源
+### 创建资源
 ```php
 php artisan make:resource Api/UserResource
+app/Http/Resources/Api/UserResource.php
+<?php
 
+namespace App\Http\Resources\Api;
 
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class UserResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        switch ($this->status){
+            case -1:
+                $this->status = '已删除';
+                break;
+            case 0:
+                $this->status = '正常';
+                break;
+            case 1:
+                $this->status = '冻结';
+                break;
+        }
+        return [
+            'id'=>$this->id,
+            'name' => $this->name,
+            'status' => $this->status,
+            'created_at'=>(string)$this->created_at,
+            'updated_at'=>(string)$this->updated_at
+        ];
+    }
+}
 ```
+
+### 使用资源
+```php
+//返回单一的资源
+return $this->success(new UserResource($user));
+//返回资源列表
+return UserResource::collection($users);
+```
+
