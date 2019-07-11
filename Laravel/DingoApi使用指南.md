@@ -25,6 +25,12 @@ Accept: application/<API_STANDARDS_TREE>.<API_SUBTYPE>.v1+json
 # 开始使用
 ## 控制器
 ### 新建控制器基类
+```php
+$ php artisan make:controller Api/Controller
+使用trait use Dingo\Api\Routing\Helpers;
+```
+### 路由管理
+### Transform
 
 
 
