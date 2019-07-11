@@ -275,6 +275,12 @@ class UserResource extends JsonResource
 //返回单一的资源
 return $this->success(new UserResource($user));
 //返回资源列表
+$users = User::paginate(3);
 return UserResource::collection($users);
 ```
+
+## Enum 枚举
+- 自己模拟app/Models/Enum/UserEnum.php
+- 使用第三方扩展（）//TODO
+
 
