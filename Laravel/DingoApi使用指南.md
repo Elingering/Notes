@@ -424,5 +424,10 @@ public function boot()
 - access_token —— 访问令牌；
 - refresh_token —— 刷新令牌；
 
-
-
+#### 刷新访问令牌
+刷新访问令牌 接口与 获取访问令牌 接口一样，只是参数不同。
+- grant_type —— 刷新令牌固定为 refresh_token；
+- client_id —— 通过 passport:client 创建的客户端 id；
+- client_secret —— 通过 passport:client 创建的客户端 secret；
+- refresh_token —— 刷新令牌；
+- scope —— 作用域，可填写 * 或者为空；
