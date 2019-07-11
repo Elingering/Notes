@@ -208,4 +208,14 @@ trait ApiResponse
 ```
 
 ### 使用响应
-新建Api基类
+- 新建Api控制器基类，引入ApiResponse Trait；
+- 继承基类控制器
+
+```php
+//返回正确消息
+return $this->success('用户登录成功...');
+//返回正确资源消息
+return $this->success($user);
+//返回自定义 http 状态码的正确信息
+
+```
