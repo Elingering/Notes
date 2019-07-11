@@ -657,3 +657,25 @@ class AdminGuardMiddleware
 我们将 token 都存到 User 表中的 last_token 字段。在登陆接口，更新 last_token 的值，并将之前的 last_token 加入 JWT 黑名单。
 
 ## horizon 管理异步队列
+```php
+- 安装：composer require laravel/horizon
+- 配置：php artisan vendor:publish --provider="Laravel\Horizon\HorizonServiceProvider"
+- 修改队列驱动：QUEUE_CONNECTION=redis
+- 仪表盘权限验证：HORIZON_IP=想通过访问的IP地址
+- 修改改 app/Providers/AuthServiceProvider.php
+public function boot()
+{
+    $this->registerPolicies();
+    Horizon::auth(function($request){
+    if(env('APP_ENV','local') =='local'{
+           return true;
+    }else{
+           $get_ip=$request->getClientIp();
+           $can_ip=en('HORIZON_IP''127.0.0.1');
+           return $get_ip == $can_ip;
+       }
+    });
+}
+- 编写任务
+- 运行：php artisan horizon
+```
