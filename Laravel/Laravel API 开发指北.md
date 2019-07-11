@@ -37,9 +37,17 @@ php artisan make:request Api/UserRequest
 
 ## 使用name登录（默认是email）
 ```php
-app/Http/Controllers/auth/LoginController.php 
+app/Http/Controllers/auth/LoginController.php 加入：
 public function username()
 {
     return 'name';
 }
+```
+
+# 构造
+
+## 跨域问题
+```php
+安装：composer require medz/cors
+配置：php artisan vendor:publish --provider="Medz\Cors\Laravel\Providers\LaravelServiceProvider" --force
 ```
