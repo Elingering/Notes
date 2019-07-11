@@ -649,3 +649,5 @@ class AdminGuardMiddleware
 - 在后台路由组中使用
 - 前台的同理copy一份
 
+## 修复角色认证串号问题
+
