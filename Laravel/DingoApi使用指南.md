@@ -546,6 +546,7 @@ $this->user()->token()->revoke();
 
 #### 处理第三方登录——直接生成访问令牌
 ```php
+创建一个Trait
 $ mkdir app/Traits
 $ touch app/Traits/PassportToken.php
 
@@ -655,6 +656,9 @@ trait PassportToken
         return $bearerToken;
     }
 }
+
+第三方登录中引入Trait，并使用
+$result = $this->getBearerTokenByUser($user, '1', false);
 ```
 
 
