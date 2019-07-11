@@ -573,4 +573,6 @@ protected $routeMiddleware = [
 ];
 ```
 - 在路由中使用
+- 与前端商定一个token失效的状态码，用于重新登录
 
+## 多角色认证
