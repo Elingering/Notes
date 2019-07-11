@@ -443,8 +443,51 @@ composer require tymon/jwt-auth 1.0.0-rc.3
 ```
 
 ### 配置
-```language
+```php
+- 添加服务提供商 config/app.php
+'providers' => [
+    ...
+    Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+]；
+- 发布配置文件
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+- 生成秘钥
+php artisan jwt:secret
+- 配置 Auth guard config/auth.php
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
 
+    'api' => [
+       'driver' => 'jwt',
+       'provider' => 'users',
+    ],
+],
+- 更改 Model
+<?php
+
+namespace App\Models;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class User extends Authenticatable implements JWTSubject
+{
+    use Notifiable;
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+    ......
 ```
 
 
