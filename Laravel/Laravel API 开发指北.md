@@ -653,4 +653,5 @@ class AdminGuardMiddleware
 原理：往JWT的payload中写入guard信息，验证时和当前路由guard做对比
 
 ## 单一设备登录
-
+原理：我们在登陆，token 过期自动更换的时候，都会产生一个新的 token。
+我们将 token 都存到User表中的 last_token 字段。在登陆接口，获取到 last_token 里的值，将其加入黑名单。
