@@ -529,7 +529,23 @@ class PassportDingoProvider extends Authorization
         return 'Bearer';
     }
 }
+
+将原来的 jwt 替换为 oauth，值为刚才创建的 Provider，这样在 Controller 中我们使用 $this->user() 就能获取到令牌对应的用户模型了。
+
+config/api.php
+'auth' => [
+    //'jwt' => 'Dingo\Api\Auth\Provider\JWT',
+    'oauth' => \App\Providers\PassportDingoProvider::class,
+],
 ```
+
+#### 删除token
+```php
+$this->user()->token()->revoke();
+```
+
+#### 处理第三方登录
+
 
 
 
