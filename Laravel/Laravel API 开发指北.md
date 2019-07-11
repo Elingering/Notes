@@ -654,4 +654,6 @@ class AdminGuardMiddleware
 
 ## 单一设备登录
 原理：我们在登陆，token 过期自动更换的时候，都会产生一个新的 token。
-我们将 token 都存到User表中的 last_token 字段。在登陆接口，获取到 last_token 里的值，将其加入黑名单。
+我们将 token 都存到 User 表中的 last_token 字段。在登陆接口，更新 last_token 的值，并将之前的 last_token 加入 JWT 黑名单。
+
+## horizon 管理异步队列
