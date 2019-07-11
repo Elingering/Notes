@@ -1,9 +1,9 @@
 # 安装
-```language
+```shell
 $ composer require dingo/api
 ```
 # 配置
-```language
+```shell
 $ php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"
 
 .
@@ -15,5 +15,12 @@ API_PREFIX=api
 API_VERSION=v1
 API_DEBUG=true
 ```
+# API版本
+使用 Accept 头来指定我们需要访问的 API 版
+```html
+Accept: application/<API_STANDARDS_TREE>.<API_SUBTYPE>.v1+json
+例：Accept: application/prs.larabbs.v1+json
+```
+
 
 
