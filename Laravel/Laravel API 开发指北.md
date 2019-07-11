@@ -615,7 +615,37 @@ config/auth.php
 - Admin 用户表
 - 框架文件：model、controller、request、resource...
 - copy一份认证中间件
-- 开始使用
+- 开始使用 （Auth::guard('admin')）
 
 ### 自动区分 guard
+
+#### 新建中间件
+```php
+php artisan make:middleware Api/AdminGuardMiddleware
+<?php
+
+namespace App\Http\Middleware\Api;
+use Closure;
+class AdminGuardMiddleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     *
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        config(['auth.defaults.guard'=>'admin']);
+        return $next($request);
+    }
+}
+```
+- 注册中间件
+- 在后台路由组中使用
+- 前台的同理copy一份
 
