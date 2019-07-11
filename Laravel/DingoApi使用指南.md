@@ -431,3 +431,31 @@ public function boot()
 - client_secret —— 通过 passport:client 创建的客户端 secret；
 - refresh_token —— 刷新令牌；
 - scope —— 作用域，可填写 * 或者为空；
+
+#### 登录
+Passport 提供的默认路由为 http://larabbs.test/oauth/token ，而我们的现在接口统一都有 /api 的前缀，所以我们不使用 Passport 默认的路由，依然使用 /api/authorizations。先来修改登录接口：
+```php
+use Psr\Http\Message\ServerRequestInterface;
+use League\OAuth2\Server\AuthorizationServer;
+use Zend\Diactoros\Response as Psr7Response;
+use League\OAuth2\Server\Exception\OAuthServerException;
+.
+public function store(AuthorizationRequest $originRequest, AuthorizationServer $server, ServerRequestInterface $serverRequest)
+{
+    try {
+       return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response)->withStatus(201);
+    } catch(OAuthServerException $e) {
+        return $this->response->errorUnauthorized($e->getMessage());
+    }
+}
+```
+逻辑很简单，我们注入了 AuthorizationServer 和 ServerRequestInterface ，调用 AuthorizationServer 的 respondToAccessTokenRequest 方法并直接返回。
+
+respondToAccessTokenRequest 会依次处理：
+- 检测 client 参数是否正确；
+- 检测 scope 参数是否正确；
+- 通过用户名查找用户；
+- 验证用户密码是否正确；
+- 生成 Response 并返回；
+
+
