@@ -650,4 +650,7 @@ class AdminGuardMiddleware
 - 前台的同理copy一份
 
 ## 修复角色认证串号问题
+原理：往JWT的payload中写入guard信息，验证时和当前路由guard做对比
+
+## 单一设备登录
 
