@@ -676,6 +676,10 @@ public function boot()
        }
     });
 }
-- 编写任务
+- 编写任务类
 - 运行：php artisan horizon
+- 访问：http://你的域名/horizon
 ```
+- 如果修改了 job 类的源码，需要将 horizon 重新启动，否则代码还是未改动前的。(应该是 horzion 是将所有任务类常驻内存的原因)
+
+#####  Supervisor 守护进程
