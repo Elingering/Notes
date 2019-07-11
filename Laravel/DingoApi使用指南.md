@@ -340,8 +340,20 @@ class ChangeLocale
 ```
 
 ### 注册middleware
+```php
+app/Http/Kernel.php
+protected $routeMiddleware = [
+// 接口语言设置
+'change-locale' => \App\Http\Middleware\ChangeLocale::class,
+];
+routes/api.php
+$api->version('v1', [
+    'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => ['serializer:array', 'bindings', 'change-locale']
+], function ($api) {
+```
 
-
+## 极光推送
 
 
 
