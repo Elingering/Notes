@@ -486,6 +486,50 @@ public function update(AuthorizationServer $server, ServerRequestInterface $serv
 ```
 
 #### 获取登录用户信息
+- 将 Laravel\Passport\HasApiTokens Trait 添加到 App\Models\User 模型中，这个 Trait 会给你的模型提供一些辅助函数，用于检查已认证用户的令牌和使用范围。
+- 修改 auth 配置，将 api guard 的 driver 由 jwt 修改为 passport。
+- 增加了一个 PassportDingoProvider，因为 DingoApi 没有做 Passport 的适配，所以需要手动处理一下：
+```php
+$ php artisan make:provider PassportDingoProvider
+
+<?php
+namespace App\Providers;
+
+use Dingo\Api\Routing\Route;
+use Illuminate\Http\Request;
+use Illuminate\Auth\AuthManager;
+use Dingo\Api\Auth\Provider\Authorization;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
+class PassportDingoProvider extends Authorization
+{
+    protected $auth;
+
+    protected $guard = 'api';
+
+    public function __construct(AuthManager $auth)
+    {
+        $this->auth = $auth->guard($this->guard);
+    }
+
+    public function authenticate(Request $request, Route $route)
+    {
+        if (! $user = $this->auth->user()) {
+            throw new UnauthorizedHttpException(
+                get_class($this),
+                'Unable to authenticate with invalid API key and token.'
+            );
+        }
+
+        return $user;
+    }
+
+    public function getAuthorizationMethod()
+    {
+        return 'Bearer';
+    }
+}
+```
 
 
 
