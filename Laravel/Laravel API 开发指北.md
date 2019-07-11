@@ -69,6 +69,8 @@ protected $routeMiddleware = [
 ```
 
 ## 统一 Response 响应处理
+
+### 封装返回的统一消息
 ```php
 app/Api/Helpers/ApiResponse.php
 <?php
@@ -205,3 +207,5 @@ trait ApiResponse
 }
 ```
 
+### 使用响应
+新建Api基类
