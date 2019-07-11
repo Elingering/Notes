@@ -217,5 +217,13 @@ return $this->success('用户登录成功...');
 //返回正确资源消息
 return $this->success($user);
 //返回自定义 http 状态码的正确信息
-
+return $this->setStatusCode(201)->success('用户登录成功...');
+//返回错误信息
+return $this->failed('用户注册失败');
+//返回自定义 http 状态码的错误信息
+return $this->failed('用户登录失败',401);
+//返回自定义 http 状态码的错误信息，同时也想返回自己内部定义的错误码
+return $this->failed('用户登录失败',401,10001);
 ```
+
+## Api-Resource 资源
