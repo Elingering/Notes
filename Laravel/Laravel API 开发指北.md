@@ -490,5 +490,16 @@ class User extends Authenticatable implements JWTSubject
     ......
 ```
 
+### 使用
+```php
+登录获取token：
+$token=Auth::guard('api')->attempt(['name'=>$request->name,'password'=>$request->password]);
+返回当前登录用户信息：
+$user = Auth::guard('api')->user();
+退出：
+Auth::guard('api')->logout();
+```
+
+
 
 
