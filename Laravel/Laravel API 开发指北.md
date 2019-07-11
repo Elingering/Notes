@@ -48,6 +48,24 @@ public function username()
 
 ## 跨域问题
 ```php
-安装：composer require medz/cors
-配置：php artisan vendor:publish --provider="Medz\Cors\Laravel\Providers\LaravelServiceProvider" --force
+- 安装：composer require medz/cors
+
+- 配置：php artisan vendor:publish --provider="Medz\Cors\Laravel\Providers\LaravelServiceProvider" --force
+
+- 修改配置文件config/cors.php：
+return [
+    ......
+    'expose-headers'     => ['Authorization'],
+    ......
+];
+
+- 增加中间件app/Http/Kernel.php：
+protected $routeMiddleware = [
+        ...... //前面的中间件
+        'cors'=> \Medz\Cors\Laravel\Middleware\ShouldGroup::class,
+];
+
+- 路由增加中间件
 ```
+
+### 修改配置文件
