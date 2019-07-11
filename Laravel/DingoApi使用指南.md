@@ -458,4 +458,34 @@ respondToAccessTokenRequest 会依次处理：
 - 验证用户密码是否正确；
 - 生成 Response 并返回；
 
+#### 支持手机登录
+Passport 会通过用户的邮箱查找用户，要支持手机登录，我们可以在用户模型定义了 findForPassport 方法，Passport 会先检测用户模型是否存在 findForPassport 方法，如果存在就通过 findForPassport 查找用户，而不是使用默认的邮箱。
+```php
+app/Models/User.php
+public function findForPassport($username)
+{
+    filter_var($username, FILTER_VALIDATE_EMAIL) ?
+        $credentials['email'] = $username :
+        $credentials['phone'] = $username;
+
+    return self::where($credentials)->first();
+}
+```
+
+#### 刷新token
+```php
+app/Http/Controllers/Api/AuthorizationsController.php
+public function update(AuthorizationServer $server, ServerRequestInterface $serverRequest)
+    {
+        try {
+           return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response);
+        } catch(OAuthServerException $e) {
+            return $this->response->errorUnauthorized($e->getMessage());
+        }
+    }
+```
+
+#### 获取登录用户信息
+
+
 
