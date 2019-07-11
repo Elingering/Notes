@@ -494,12 +494,20 @@ class User extends Authenticatable implements JWTSubject
 ```php
 登录获取token：
 $token=Auth::guard('api')->attempt(['name'=>$request->name,'password'=>$request->password]);
+['token' => 'bearer ' . $token]
 返回当前登录用户信息：
 $user = Auth::guard('api')->user();
 退出：
 Auth::guard('api')->logout();
 ```
 
+### 请求
+在 Postman 的 Header 头部分再加一个 key 为 Authorization，value 为登陆成功后返回的 token 值，然后再次进行请求，可以看到成功返回当前登陆用户的信息。
 
+## 自动刷新用户认证
 
+### 自定义认证中间件
+```php
+
+```
 
