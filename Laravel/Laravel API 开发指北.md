@@ -5,6 +5,7 @@ MySQL > 5.5
 Redis > 2.8
 Laravel 5.7
 ```
+- 为了模拟AJAX请求，请将 header头 设置X-Requested-With 为 XMLHttpRequest
 
 # 初始化数据
 
@@ -26,3 +27,10 @@ Route::namespace('Api')->prefix('v1')->group(function () {
 });
 ```
 
+## 验证器
+```php
+基类验证器
+php artisan make:request Api/FormRequest
+普通验证器
+php artisan make:request Api/UserRequest
+```
