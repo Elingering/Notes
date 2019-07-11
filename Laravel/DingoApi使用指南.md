@@ -391,9 +391,8 @@ $ php artisan passport:keys
 $ php artisan passport:client --password --name='larabbs-ios'
 ```
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/11/1562829422574-1562829422577.png?token=AFRM333WHG2ALM25YQPM34K5E3RKY)
-![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/11/Snipaste_2019-07-11_15-10-02-1562829053024.png?token=AFRM33ZAS5MZ2OEXPSUW4PC5E3QTW)
 
-
+#### 
 
 
 
