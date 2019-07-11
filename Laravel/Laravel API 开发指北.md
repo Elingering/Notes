@@ -435,4 +435,17 @@ class Handler extends ExceptionHandler
 }
 ```
 
+## jwt-auth
+
+### 安装
+```php
+composer require tymon/jwt-auth 1.0.0-rc.3
+```
+
+### 配置
+```language
+
+```
+
+
 
