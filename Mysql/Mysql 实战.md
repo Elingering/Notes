@@ -73,6 +73,9 @@ redo log 用于保证 crash-safe 能力。innodb_flush_log_at_trx_commit 这个�
 
 sync_binlog 这个参数设置成 1 的时候，表示每次事务的 binlog 都持久化到磁盘。这个参数我也建议你设置成 1，这样可以保证 MySQL 异常重启之后 binlog 不丢失。
 
+## 问题
+如果表 T 中没有字段 k，而你执行了这个语句 select * from T where k=1, 那肯定是会报“不存在这个列”的错误： “Unknown column ‘k’ in ‘where clause’”。你觉得这个错误是在我们上面提到的哪个阶段报出来的呢？
+
 # 事务隔离：为什么你改了我还看不见？
 
 ## 隔离性与隔离级别
