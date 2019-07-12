@@ -37,3 +37,7 @@ mysql> select SQL_CACHE * from T where ID=10；
 在有些场景下，执行器调用一次，在引擎内部则扫描了多行，因此**引擎扫描行数跟 rows_examined 并不是完全相同的**。
 
 # 日志系统：一条SQL更新语句是如何执行的？
+查询语句的那一套流程，更新语句也是同样会走一遍。
+
+## 重要的日志模块：redo log
+WAL 的全称是 Write-Ahead Logging，它的关键点就是先写日志，再写磁盘
