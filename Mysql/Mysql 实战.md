@@ -155,6 +155,8 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562911072622-1562911072647.png?token=AFRM333U4TMJ5MFSUZN4JSS5FAQ2A)
 二叉搜索树的特点是：每个节点的左儿子小于父节点，父节点又小于右儿子。这样如果你要查 ID_card_n2 的话，按照图中的搜索顺序就是按照 UserA -> UserC -> UserF -> User2 这个路径得到。这个时间复杂度是 O(log(N))。
 
+当然为了维持 O(log(N)) 的查询复杂度，你就需要保持这棵树是平衡二叉树。为了做这个保证，更新的时间复杂度也是 O(log(N))。
+
 
 ## InnoDB 的索引模型
 
