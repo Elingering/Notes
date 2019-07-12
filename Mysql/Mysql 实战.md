@@ -141,7 +141,7 @@ MySQL 的事务启动方式有以下几种：
 select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
 ```
 
-##问题
+## 问题
 如何避免长事务对业务的影响？
 
 - 首先，从应用开发端来看：
