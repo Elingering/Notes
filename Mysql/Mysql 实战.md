@@ -117,3 +117,11 @@ MySQL 的事务启动方式有以下几种：
 - set autocommit=0，这个命令会将这个线程的自动提交关掉。意味着如果你只执行一个 select 语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你主动执行 commit 或 rollback 语句，或者断开连接。
 ==建议你总是使用 set autocommit=1, 通过显式语句的方式来启动事务。==
 
+在 autocommit 为 1 的情况下，用 begin 显式启动的事务，如果执行 commit 则提交事务。如果执行 commit work and chain，则是提交事务并自动启动下一个事务，这样也省去了再次执行 begin 语句的开销。同时带来的好处是从程序开发的角度明确地知道每个语句是否处于事务中。
+
+你可以在 information_schema 库的 innodb_trx 这个表中查询长事务，比如下面这个语句，用于查找持续时间超过 60s 的事务：
+```sql
+select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
+
+```
+
