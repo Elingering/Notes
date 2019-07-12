@@ -255,6 +255,7 @@ InnoDB 采用的 B+ 树结构，B+ 树能够很好地配合磁盘的读写特性
 ## 问题
 如何正确的重建索引？
 
+
 # 深入浅出索引（下）
 ```sql
 mysql> create table T (
@@ -319,4 +320,27 @@ mysql> select * from tuser where name like '张 %' and age=10 and ismale=1;
 ## 小结
 在满足语句需求的情况下， 尽量少地访问资源是数据库设计的重要原则之一。我们在使用数据库的时候，尤其是在设计表结构时，也要以减少资源消耗作为目标。
 
+## 问题
+实际上主键索引也是可以使用多个字段的。DBA 小吕在入职新公司的时候，就发现自己接手维护的库里面，有这么一个表，表结构定义类似这样的：
+```sql
+CREATE TABLE `geek` (
+  `a` int(11) NOT NULL,
+  `b` int(11) NOT NULL,
+  `c` int(11) NOT NULL,
+  `d` int(11) NOT NULL,
+  PRIMARY KEY (`a`,`b`),
+  KEY `c` (`c`),
+  KEY `ca` (`c`,`a`),
+  KEY `cb` (`c`,`b`)
+) ENGINE=InnoDB;
+```
+公司的同事告诉他说，由于历史原因，这个表需要 a、b 做联合主键，这个小吕理解了。
 
+但是，学过本章内容的小吕又纳闷了，既然主键包含了 a、b 这两个字段，那意味着单独在字段 c 上创建一个索引，就已经包含了三个字段了呀，为什么要创建“ca”“cb”这两个索引？
+
+同事告诉他，是因为他们的业务里面有这样的两种语句：
+```sql
+select * from geek where c=N order by a limit 1;
+select * from geek where c=N order by b limit 1;
+```
+问题是，这位同事的解释对吗，为了这两个查询模式，这两个索引是否都是必须的？为什么呢？
