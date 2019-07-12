@@ -257,6 +257,26 @@ InnoDB 采用的 B+ 树结构，B+ 树能够很好地配合磁盘的读写特性
 
 # 深入浅出索引（下）
 ```sql
+mysql> create table T (
+ID int primary key,
+k int NOT NULL DEFAULT 0, 
+s varchar(16) NOT NULL DEFAULT '',
+index k(k))
+engine=InnoDB;
 
+insert into T values(100,1, 'aa'),(200,2,'bb'),(300,3,'cc'),(500,5,'ee'),(600,6,'ff'),(700,7,'gg');
+
+select * from T where k between 3 and 5
 ```
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562919115026-1562919115029.png?token=AFRM335AAUWNIE4QMTEAHCC5FBAQW)
+现在，我们一起来看看这条 SQL 查询语句的执行流程：
+1. 在 k 索引树上找到 k=3 的记录，取得 ID = 300；
+2. 再到 ID 索引树查到 ID=300 对应的 R3；
+3. 在 k 索引树取下一个值 k=5，取得 ID=500；
+4. 再回到 ID 索引树查到 ID=500 对应的 R4；
+5. 在 k 索引树取下一个值 k=6，不满足条件，循环结束。
+在这个过程中，回到主键索引树搜索的过程，我们称为回表。可以看到，这个查询过程读了 k 索引树的 3 条记录（步骤 1、3 和 5），回表了两次（步骤 2 和 4）。
+
+## 覆盖索引
+**覆盖索引可以减少树的搜索次数，显著提升查询性能，所以使用覆盖索引是一个常用的性能优化手段。**
 
