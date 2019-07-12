@@ -40,4 +40,7 @@ mysql> select SQL_CACHE * from T where ID=10；
 查询语句的那一套流程，更新语句也是同样会走一遍。
 
 ## 重要的日志模块：redo log
-WAL 的全称是 Write-Ahead Logging，它的关键点就是先写日志，再写磁盘
+WAL 的全称是 Write-Ahead Logging，它的关键点就是先写日志，再写磁盘。
+
+
+## 重要的日志模块：binlog
