@@ -312,6 +312,9 @@ select * from T where k between 3 and 5
 mysql> select * from tuser where name like '张 %' and age=10 and ismale=1;
 ```
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562921356558-1562921356562.png?token=AFRM333SAP6KHXFTUGL5FFC5FBE4Y)
-
+无索引下推执行流程
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562921378370-1562921378375.png?token=AFRM333YB5GVC7XVIIX7OJC5FBE6A)
+索引下推执行流程
+
+## 小结
 
