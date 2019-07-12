@@ -101,6 +101,10 @@ sync_binlog 这个参数设置成 1 的时候，表示每次事务的 binlog 都
 配置的方式是，将启动参数 transaction-isolation 的值设置成 读未提交（read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（serializable ）。
 
 ## 事务隔离的实现
+在 MySQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。
+
+同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）
+
 
 
 ## 事务的启动方式
