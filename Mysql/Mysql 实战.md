@@ -305,5 +305,13 @@ select * from T where k between 3 and 5
 - 第二原则是，考虑索引占用的空间。
 
 ## 索引下推（MySQL >= 5.6）
+可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。
 
+我们还是以市民表的联合索引（name, age）为例。如果现在有一个需求：检索出表中“名字第一个字是张，而且年龄是 10 岁的所有男孩”。那么，SQL 语句是这么写的：
+```sql
+mysql> select * from tuser where name like '张 %' and age=10 and ismale=1;
+```
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562921356558-1562921356562.png?token=AFRM333SAP6KHXFTUGL5FFC5FBE4Y)
+
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562921378370-1562921378375.png?token=AFRM333YB5GVC7XVIIX7OJC5FBE6A)
 
