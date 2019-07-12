@@ -65,3 +65,5 @@ write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以�
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562898157575-1562898157599.png?token=AFRM334T64TNG5MHH5XUO2S5E7XS4)
 
 ## 两阶段提交
+如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致。
+简单说，redo log 和 binlog 都可以用于表示事务的提交状态，而两阶段提交就是让这两个状态保持逻辑上的一致。
