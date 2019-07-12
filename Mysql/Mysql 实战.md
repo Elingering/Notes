@@ -4,4 +4,6 @@
 Mysql 的逻辑架构图
 
 ## 连接器
+```mysql
 mysql -h$ip -P$port -u$user -p
+```
