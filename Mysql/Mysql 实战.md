@@ -63,3 +63,5 @@ write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以�
 5. 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成提交（commit）状态，更新完成。
 这里我给出这个 update 语句的执行流程图，图中浅色框表示是在 InnoDB 内部执行的，深色框表示是在执行器中执行的：
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562898157575-1562898157599.png?token=AFRM334T64TNG5MHH5XUO2S5E7XS4)
+
+## 两阶段提交
