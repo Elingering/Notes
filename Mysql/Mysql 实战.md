@@ -172,9 +172,18 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 
 表中 R1~R5 的 (ID,k) 值分别为 (100,1)、(200,2)、(300,3)、(500,5) 和 (600,6)，两棵树的示例示意图如下。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562915454488-1562915454494.png?token=AFRM33ZRINWUG6XOVCPHUAK5FAZL4)
-主键索引的叶子节点存的是整行数据。在 InnoDB 里，主键索引也被称为聚簇索引（clustered index）。
+主键索引的叶子节点存的是**整行数据**。在 InnoDB 里，主键索引也被称为聚簇索引（clustered index）。
 
-非主键索引的叶子节点内容是主键的值。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）。
+非主键索引的叶子节点内容是**主键的值**。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）。
+
+基于主键索引和普通索引的查询有什么区别：
+- 如果语句是主键查询方式，则只需要搜索 ID 这棵 B+ 树；
+- 如果语句是普通索引查询方式，则需要先搜索 k 索引树，得到 ID 的值为 500，再到 ID 索引树搜索一次。这个过程称为**回表**。
+
+### 索引维护
+
+
+
 
 # 深入浅出索引（下）
 
