@@ -1,7 +1,7 @@
 # 基础架构：一条SQL查询语句是如何执行的?
 
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562894956552-1562894956587.png?token=AFRM336B6ASVJK6EZQGJTJK5E7RKY)
-Mysql 的逻辑架构图
+MySQL 的逻辑架构图
 
 ## 连接器
 ```sql
@@ -23,3 +23,8 @@ MySQL 拿到一个查询请求后，会先到查询缓存看看，之前是不�
 ```sql
 mysql> select SQL_CACHE * from T where ID=10；
 ```
+==MySQL 8.0 删除了查询缓存==
+
+## 分析器
+”词法分析“-》
+## 优化器
