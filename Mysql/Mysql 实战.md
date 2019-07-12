@@ -123,6 +123,9 @@ MySQL 的事务启动方式有以下几种：
 你可以在 information_schema 库的 innodb_trx 这个表中查询长事务，比如下面这个语句，用于查找持续时间超过 60s 的事务：
 ```sql
 select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
-
 ```
+
+# 深入浅出索引（上）
+
+# 深入浅出索引（下）
 
