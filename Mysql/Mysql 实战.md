@@ -113,4 +113,7 @@ sync_binlog 这个参数设置成 1 的时候，表示每次事务的 binlog 都
 
 ## 事务的启动方式
 MySQL 的事务启动方式有以下几种：
-显式启动事务语句， begin 或 start transaction。配套的提交语句是 commit，回滚语句是 rollback。set autocommit=0，这个命令会将这个线程的自动提交关掉。意味着如果你只执行一个 select 语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你主动执行 commit 或 rollback 语句，或者断开连接。
+- 显式启动事务语句， begin 或 start transaction。配套的提交语句是 commit，回滚语句是 rollback。
+- set autocommit=0，这个命令会将这个线程的自动提交关掉。意味着如果你只执行一个 select 语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你主动执行 commit 或 rollback 语句，或者断开连接。
+==建议你总是使用 set autocommit=1, 通过显式语句的方式来启动事务。==
+
