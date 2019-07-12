@@ -135,7 +135,16 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 哈希表是一种以键 - 值（key-value）存储数据的结构，我们只要输入待查找的值即 key，就可以找到其对应的值即 Value。哈希的思路很简单，把值放在数组里，用一个哈希函数把 key 换算成一个确定的位置，然后把 value 放在数组的这个位置。
 
 不可避免地，多个 key 值经过哈希函数的换算，会出现同一个值的情况。处理这种情况的一种方法是，拉出一个链表。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562910823827-1562910823836.png?token=AFRM33ZZSMHUKCZNVC3PX225FAQKQ)
+需要注意的是，图中四个 ID_card_n 的值并不是递增的，这样做的好处是增加新的 User 时速度会很快，只需要往后追加。但缺点是，因为不是有序的，所以哈希索引做区间查询的速度是很慢的。
 
+你可以设想下，如果你现在要找身份证号在 [ID_card_X, ID_card_Y] 这个区间的所有用户，就必须全部扫描一遍了。
+
+所以，哈希表这种结构适用于只有等值查询的场景，比如 Memcached 及其他一些 NoSQL 引擎。
+
+- 有序数组
+有序数组在等值查询和范围查询场景中的性能就都非常优秀。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562910944478-1562910944487.png?token=AFRM336VXVLAFXZGS564FZK5FAQSC)
 
 
 ## InnoDB 的索引模型
