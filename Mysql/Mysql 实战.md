@@ -294,6 +294,8 @@ select * from T where k between 3 and 5
 **B+ 树这种索引结构，可以利用索引的“最左前缀”，来定位记录。**
 
 为了直观地说明这个概念，我们用（name，age）这个联合索引来分析。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562920527312-1562920527321.png?token=AFRM332SRPVVTNFXJKLESCK5FBDI6)
+"where name = ‘张三’" 和 "where name like ‘张 %’"都能用上这个索引。
 
 可以看到，不只是索引的全部定义，只要满足最左前缀，就可以利用索引来加速检索。这个最左前缀可以是联合索引的最左 N 个字段，也可以是字符串索引的最左 M 个字符。
 
