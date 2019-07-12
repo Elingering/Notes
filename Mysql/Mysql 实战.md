@@ -39,14 +39,14 @@ mysql> select SQL_CACHE * from T where ID=10；
 # 日志系统：一条SQL更新语句是如何执行的？
 查询语句的那一套流程，更新语句也是同样会走一遍。
 
-## 重要的日志模块：redo log
+## 重要的日志模块：redo log （InnoDB 引擎特有的日志）
 WAL 的全称是 Write-Ahead Logging，它的关键点就是先写日志，再写磁盘。
-当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面。
+当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log （粉板）里面，并更新内存，这个时候更新就算完成了。同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面。
 
 InnoDB 的 redo log 是固定大小的，比如可以配置为一组 4 个文件，每个文件的大小是 1GB，那么这块“粉板”总共就可以记录 4GB 的操作。从头开始写，写到末尾就又回到开头循环写：
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562897221514-1562897221521.png?token=AFRM3364FNVDRLEDCXG6LUC5E7VYI)
 write pos 是当前记录的位置，一边写一边后移，写到第 3 号文件末尾后就回到 0 号文件开头。checkpoint 是当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件。（这个用LSN来记录，后面文章会提到）
 
+write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以用来记录新的操作。如果 write pos 追上 checkpoint，表示“粉板”满了，这时候不能再执行新的更新，得停下来先擦掉一些记录，把 checkpoint 推进一下。有了 redo log，InnoDB 就可以保证即使数据库发生异常重启，之前提交的记录都不会丢失，这个能力称为 crash-safe
 
-
-## 重要的日志模块：binlog
+## 重要的日志模块：binlog （server 层的日志）
