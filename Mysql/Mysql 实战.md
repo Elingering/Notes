@@ -127,7 +127,8 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 
 # 深入浅出索引（上）
 
-## 
+## 索引的常见模型
+可以用于提高读写效率的数据结构很多，这里我先给你介绍三种常见、也比较简单的数据结构，它们分别是**哈希表**、**有序数组**和**搜索树**。
 
 # 深入浅出索引（下）
 
