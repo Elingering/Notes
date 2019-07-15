@@ -1,4 +1,4 @@
-# 基础架构：一条SQL查询语句是如何执行的?
+# 1.基础架构：一条SQL查询语句是如何执行的?
 
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562894956552-1562894956587.png?token=AFRM336B6ASVJK6EZQGJTJK5E7RKY)
 MySQL 的逻辑架构图
@@ -39,7 +39,7 @@ mysql> select SQL_CACHE * from T where ID=10；
 ## 问题
 如果表 T 中没有字段 k，而你执行了这个语句 select * from T where k=1, 那肯定是会报“不存在这个列”的错误： “Unknown column ‘k’ in ‘where clause’”。你觉得这个错误是在我们上面提到的哪个阶段报出来的呢？
 
-# 日志系统：一条SQL更新语句是如何执行的？
+# 2.日志系统：一条SQL更新语句是如何执行的？
 查询语句的那一套流程，更新语句也是同样会走一遍。
 
 ## 重要的日志模块：redo log （InnoDB 引擎特有的日志）
@@ -89,7 +89,7 @@ sync_binlog 这个参数设置成 1 的时候，表示每次事务的 binlog 都
 
 当然这个是有成本的，因为更频繁全量备份需要消耗更多存储空间，所以这个 RTO 是成本换来的，就需要你根据业务重要性来评估了。
 
-# 事务隔离：为什么你改了我还看不见？
+# 3.事务隔离：为什么你改了我还看不见？
 
 ## 隔离性与隔离级别
 提到事务，你肯定会想到 ACID（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）
