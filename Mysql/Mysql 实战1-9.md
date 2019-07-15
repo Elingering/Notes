@@ -457,7 +457,17 @@ DDL 从主库传过来的时间按照效果不同，我打了四个时刻。题�
 - 第三种方式（即：在 20 个连接中同时执行 delete from T limit 500），会人为造成锁冲突。
 
 # 8.事务到底是隔离的还是不隔离的？
-事务的启动时机。
+举个例子：
+```sql
+mysql> CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `k` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+insert into t(id, k) values(1,1),(2,2);
+```
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/15/1563200088708-1563200088709.png)
+这里，我们需要注意的是事务的启动时机。
 
 begin/start transaction 命令并不是一个事务的起点，在执行到它们之后的第一个操作 InnoDB 表的语句，事务才真正启动。如果你想要马上启动一个事务，可以使用 start transaction with consistent snapshot 这个命令。
 > 第一种启动方式，一致性视图是在第执行第一个快照读语句时创建的； 第二种启动方式，一致性视图是在执行 start transaction with consistent snapshot 时创建的。
