@@ -551,6 +551,17 @@ InnoDB 的行数据有多个版本，每个数据版本有自己的 row trx_id�
 而当前读，总是读取已经提交完成的最新版本。
 
 ## 问题
+如何构造一个“数据无法修改”的场景。
+```sql
+mysql> CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `c` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+insert into t(id, c) values(1,1),(2,2),(3,3),(4,4);
+```
+
+用另外一个事物在update执行之前，先把所有c值修改，应该就可以。比如update t set c = id + 1。这个实际场景还挺常见——所谓的“乐观锁”。时常我们会基于version字段对row进行cas式的更新，类似update ...set ... where id = xxx and version = xxx。如果version被其他事务抢先更新，则在自己事务中更新失败，trx_id没有变成自身事务的id，同一个事务中再次select还是旧值，就会出现“明明值没变可就是更新不了”的“异象”（anomaly）。解决方案就是每次cas更新不管成功失败，结束当前事务。如果失败（判断是否成功的标准是 affected_rows 是不是等于预期值）则重新起一个事务进行查询更新。
 
 # 9.普通索引和唯一索引，应该怎么选择？
 
