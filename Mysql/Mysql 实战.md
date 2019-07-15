@@ -348,4 +348,5 @@ select * from geek where c=N order by b limit 1;
 
 # 全局锁和表锁 ：给表加个字段怎么有这么多阻碍？
 
-
+## 全局锁
+全局锁的典型使用场景是，做全库逻辑备份。
