@@ -346,6 +346,8 @@ select * from geek where c=N order by b limit 1;
 ```
 这位同事的解释对吗，为了这两个查询模式，这两个索引是否都是必须的？为什么呢？
 
+
+
 # 全局锁和表锁 ：给表加个字段怎么有这么多阻碍？
 
 ## 全局锁
@@ -373,6 +375,7 @@ MDL 会直到事务提交才释放，在做表结构变更的时候，你一定�
 
 ## 问题
 备份一般都会在备库上执行，你在用–single-transaction 方法做逻辑备份的过程中，如果主库上的一个小表做了一个 DDL，比如给一个表上加了一列。这时候，从备库上会看到什么现象呢？
-![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/15/1563156528755-1563156528791.png)
+
+# 
 
 
