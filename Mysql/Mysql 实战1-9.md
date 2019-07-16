@@ -618,8 +618,8 @@ redo log 主要节省的是随机写磁盘的 IO 消耗（随机写磁盘转成�
 ## 问题
 change buffer 一开始是写内存的，那么如果这个时候机器掉电重启，会不会导致 change buffer 丢失呢？change buffer 丢失可不是小事儿，再从磁盘读入数据可就没有了 merge 过程，就等于是数据丢失了。会不会出现这种情况呢？
 
-1.change buffer有一部分在内存有一部分在ibdata.做purge操作,应该就会把change buffer里相应的数据持久化到ibdata
-2.redo log里记录了数据页的修改以及change buffer新写入的信息如果掉电,持久化的change buffer数据已经purge,不用恢复。主要分析没有持久化的数据情况又分为以下几种:
+1.change buffer有一部分在内存有一部分在ibdata.做merge操作,应该就会把change buffer里相应的数据持久化到ibdata
+2.redo log里记录了数据页的修改以及change buffer新写入的信息如果掉电,持久化的change buffer数据已经merge,不用恢复。主要分析没有持久化的数据情况又分为以下几种:
 (1)change buffer写入,redo log虽然做了fsync但未commit,binlog未fsync到磁盘,这部分数据丢失
 (2)change buffer写入,redo log写入但没有commit,binlog以及fsync到磁盘,先从binlog恢复redo log,再从redo log恢复change buffer
 (3)change buffer写入,redo log和binlog都已经fsync.那么直接从redo log里恢复。
