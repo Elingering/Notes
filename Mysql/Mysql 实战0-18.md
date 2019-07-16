@@ -11,6 +11,15 @@ MySQL 在真正开始执行语句之前，并不能精确地知道满足这个�
 
 我们可以使用 show index 方法，看到一个索引的基数。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563254463067-1563254463096.png)
+优化器为什么放着扫描 37000 行的执行计划不用，却选择了扫描行数是 100000 的执行计划呢？
 
+这是因为，如果使用索引 a，每次从索引 a 上拿到一个值，都要回到主键索引上查出整行数据，这个代价优化器也要算进去的。
+
+而如果选择扫描 10 万行，是直接在主键索引上扫描的，没有额外的代价。
+
+优化器会估算这两个选择的代价，从结果看来，优化器认为直接扫描主键索引更快。当然，从执行时间看来，这个选择并不是最优的。
+
+执行 analyze table t 命令重新统计索引信息
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563255158333-1563255158344.png)
 
 ## 索引选择异常和处理
