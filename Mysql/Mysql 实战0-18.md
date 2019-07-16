@@ -23,3 +23,7 @@ MySQL 在真正开始执行语句之前，并不能精确地知道满足这个�
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563255158333-1563255158344.png)
 
 ## 索引选择异常和处理
+一种方法是，像我们第一个例子一样，采用 force index 强行选择一个索引。
+
+第二种方法就是，我们可以考虑修改语句，引导 MySQL 使用我们期望的索引。
+
