@@ -35,4 +35,5 @@ MySQL 在真正开始执行语句之前，并不能精确地知道满足这个�
 
 ## 问题
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563255853891-1563255853895.png)
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563255932537-1563255932542.png)
 我们平常不断地删除历史数据和新增数据，这时，MySQL 竟然会选错索引。
