@@ -123,3 +123,12 @@ fio -filename=$filename -direct=1 -iodepth 1 -thread -rw=randrw -ioengine=psync 
 ```
 
 InnoDB 的刷盘速度就是要参考这两个因素：一个是脏页比例，一个是 redo log 写盘速度。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563260695446-1563260695477.png)
+根据上述算得的 F1(M) 和 F2(N) 两个值，取其中较大的值记为 R，之后引擎就可以按照 innodb_io_capacity 定义的能力乘以 R% 来控制刷脏页的速度。
+
+平时要多关注脏页比例，不要让它经常接近 75%。计算方法：
+```sql
+mysql> select VARIABLE_VALUE into @a from global_status where VARIABLE_NAME = 'Innodb_buffer_pool_pages_dirty';
+select VARIABLE_VALUE into @b from global_status where VARIABLE_NAME = 'Innodb_buffer_pool_pages_total';
+select @a/@b;
+```
