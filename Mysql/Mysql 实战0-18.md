@@ -203,5 +203,8 @@ delete 命令其实只是把记录的位置，或者数据页标记为了“可�
 # 14 | count(*)这么慢，我该怎么办？
 
 ## count(*) 的实现方式
+- MyISAM 引擎把一个表的总行数存在了磁盘上，因此执行 count(*) 的时候会直接返回这个数，效率很高；
+- 而 InnoDB 引擎就麻烦了，它执行 count(*) 的时候，需要把数据一行一行地从引擎里面读出来，然后累积计数。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/16/1563267555042-1563267555051.png)
 
 
