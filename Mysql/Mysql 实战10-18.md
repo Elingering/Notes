@@ -422,9 +422,10 @@ select * from t limit @Y3，1；
 需要注意的是，优化器并不是要放弃使用这个索引。
 
 在这个例子里，放弃了树搜索功能，优化器可以选择遍历主键索引，也可以选择遍历索引 t_modified，优化器对比索引大小后发现，索引 t_modified 更小，遍历这个索引比遍历主键索引来得更快。因此最终还是会选择索引 t_modified。
-
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563344507966-1563344507978.png)
 由于加了 month() 函数操作，MySQL 无法再使用索引快速定位功能，而只能使用全索引扫描。
 
+## 案例二：隐式类型转换
 
 
 
