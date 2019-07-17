@@ -309,12 +309,15 @@ city、name、age 这三个字段的定义总长度是 36，我把 max_length_fo
 新的算法放入 sort_buffer 的字段，只有要排序的列（即 name 字段）和主键 id。
 
 但这时，排序的结果就因为少了 city 和 age 字段的值，不能直接返回了，整个执行流程就变成如下所示的样子：
-初始化 sort_buffer，确定放入两个字段，即 name 和 id；
-从索引 city 找到第一个满足 city='杭州’条件的主键 id，也就是图中的 ID_X；
-到主键 id 索引取出整行，取 name、id 这两个字段，存入 sort_buffer 中；
-从索引 city 取下一个记录的主键 id；
-重复步骤 3、4 直到不满足 city='杭州’条件为止，也就是图中的 ID_Y；
-对 sort_buffer 中的数据按照字段 name 进行排序；
-遍历排序结果，取前 1000 行，并按照 id 的值回到原表中取出 city、name 和 age 三个字段返回给客户端。
+1. 初始化 sort_buffer，确定放入两个字段，即 name 和 id；
+2. 从索引 city 找到第一个满足 city='杭州’条件的主键 id，也就是图中的 ID_X；
+3. 到主键 id 索引取出整行，取 name、id 这两个字段，存入 sort_buffer 中；
+4. 从索引 city 取下一个记录的主键 id；
+5. 重复步骤 3、4 直到不满足 city='杭州’条件为止，也就是图中的 ID_Y；
+6. 对 sort_buffer 中的数据按照字段 name 进行排序；
+7. 遍历排序结果，取前 1000 行，并按照 id 的值回到原表中取出 city、name 和 age 三个字段返回给客户端。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563330469015-1563330469022.png)
+
+## 全字段排序 VS rowid 排序
 
 
