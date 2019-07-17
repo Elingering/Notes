@@ -426,7 +426,16 @@ select * from t limit @Y3，1；
 由于加了 month() 函数操作，MySQL 无法再使用索引快速定位功能，而只能使用全索引扫描。
 
 ## 案例二：隐式类型转换
+在 MySQL 中，字符串和数字做比较的话，是将==字符串==转换成==数字==。
+```sql
+tradeid 类型为字符串
+mysql> select * from tradelog where tradeid=110717;
+就知道对于优化器来说，这个语句相当于：
+mysql> select * from tradelog where  CAST(tradid AS signed int) = 110717;
+```
+这条语句触发了我们上面说到的规则：对索引字段做函数操作，优化器会放弃走树搜索功能。
 
+## 案例三：隐式字符编码转换
 
 
 
