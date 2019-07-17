@@ -436,6 +436,10 @@ mysql> select * from tradelog where  CAST(tradid AS signed int) = 110717;
 这条语句触发了我们上面说到的规则：对索引字段做函数操作，优化器会放弃走树搜索功能。
 
 ## 案例三：隐式字符编码转换
+```sql
 
+```
+
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563345541128-1563345541139.png)
 
 
