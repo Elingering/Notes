@@ -317,6 +317,12 @@ city、name、age 这三个字段的定义总长度是 36，我把 max_length_fo
 6. 对 sort_buffer 中的数据按照字段 name 进行排序；
 7. 遍历排序结果，取前 1000 行，并按照 id 的值回到原表中取出 city、name 和 age 三个字段返回给客户端。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563330469015-1563330469022.png)
+
+## 全字段排序 VS rowid 排序
+MySQL 之所以需要生成临时表，并且在临时表上做排序操作，**其原因是原来的数据都是无序的**。
+
+创建name，city的复合索引
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563331618680-1563331618688.png)
 这样整个查询过程的流程就变成了：
 1. 从索引 (city,name) 找到第一个满足 city='杭州’条件的主键 id；
 2. 到主键 id 索引取出整行，取 name、city、age 三个字段的值，作为结果集的一部分直接返回；
@@ -333,15 +339,6 @@ alter table t add index city_user_age(city, name, age);
 2. 从索引 (city,name,age) 取下一个记录，同样取出这三个字段的值，作为结果集的一部分直接返回；
 3. 重复执行步骤 2，直到查到第 1000 条记录，或者是不满足 city='杭州’条件时循环结束。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563331805907-1563331805909.png)
-
-
-
-## 全字段排序 VS rowid 排序
-MySQL 之所以需要生成临时表，并且在临时表上做排序操作，**其原因是原来的数据都是无序的**。
-
-创建name，city的复合索引
-![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563331618680-1563331618688.png)
-
 
 ## 问题
 假设你的表里面已经有了 city_name(city, name) 这个联合索引，然后你要查杭州和苏州两个城市中所有的市民的姓名，并且按名字排序，显示前 100 条记录。如果 SQL 查询语句是这么写的 ：
