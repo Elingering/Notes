@@ -324,6 +324,17 @@ city、name、age 这三个字段的定义总长度是 36，我把 max_length_fo
 4. 重复步骤 2、3，直到查到第 1000 条记录，或者是不满足 city='杭州’条件时循环结束。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563331673663-1563331673673.png)
 
+使用覆盖索引进一步简化。覆盖索引是指，索引上的信息足够满足查询请求，不需要再回到主键索引上去取数据。
+```sql
+alter table t add index city_user_age(city, name, age);
+```
+这时，对于 city 字段的值相同的行来说，还是按照 name 字段的值递增排序的，此时的查询语句也就不再需要排序了。这样整个查询语句的执行流程就变成了：
+1. 从索引 (city,name,age) 找到第一个满足 city='杭州’条件的记录，取出其中的 city、name 和 age 这三个字段的值，作为结果集的一部分直接返回；
+2. 从索引 (city,name,age) 取下一个记录，同样取出这三个字段的值，作为结果集的一部分直接返回；
+3. 重复执行步骤 2，直到查到第 1000 条记录，或者是不满足 city='杭州’条件时循环结束。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563331805907-1563331805909.png)
+
+
 
 ## 全字段排序 VS rowid 排序
 MySQL 之所以需要生成临时表，并且在临时表上做排序操作，**其原因是原来的数据都是无序的**。
