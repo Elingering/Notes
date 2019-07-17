@@ -373,6 +373,7 @@ mysql> select word from words order by rand() limit 3;
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563340009915-1563340009942.png)
 order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。
 
+## 磁盘临时表
 
 
 # 18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
