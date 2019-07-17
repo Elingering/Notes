@@ -1,0 +1,100 @@
+# 19 | 为什么我只查一行的语句，也执行这么慢？
+为了便于描述，我还是构造一个表，基于这个表来说明今天的问题。这个表有两个字段 id 和 c，并且我在里面插入了 10 万行记录。
+```sql
+mysql> CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `c` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+delimiter ;;
+create procedure idata()
+begin
+  declare i int;
+  set i=1;
+  while(i<=100000) do
+    insert into t values(i,i);
+    set i=i+1;
+  end while;
+end;;
+delimiter ;
+
+call idata();
+```
+
+## 第一类：查询长时间不返回
+> mysql> select * from t where id=1;
+一般碰到这种情况的话，大概率是表 t 被锁住了。接下来分析原因的时候，一般都是首先执行一下 show processlist 命令，看看当前语句处于什么状态。
+
+### 等 MDL 锁
+这类问题的处理方式，就是找到谁持有 MDL 写锁，然后把它 kill 掉。
+
+但是，由于在 show processlist 的结果里面，session A 的 Command 列是“Sleep”，导致查找起来很不方便。不过有了 performance_schema 和 sys 系统库以后，就方便多了。（MySQL 启动时需要设置 performance_schema=on，相比于设置为 off 会有 10% 左右的性能损失)
+
+通过查询 sys.schema_table_lock_waits 这张表，我们就可以直接找出造成阻塞的 process id，把这个连接用 kill 命令断开即可。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349225332-1563349225337.png)
+
+### 等 flush
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349497517-1563349497522.png)
+出现 Waiting for table flush 状态的可能情况是：有一个 flush tables 命令被别的语句堵住了，然后它又堵住了我们的 select 语句。
+复现 Waiting for table flush
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349564023-1563349564026.png)
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349577259-1563349577262.png)
+
+### 等行锁
+> mysql> select * from t where id=1 lock in share mode; 
+由于访问 id=1 这个记录时要加读锁，如果这时候已经有一个事务在这行记录上持有一个写锁，我们的 select 语句就会被堵住。
+复现：
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349671045-1563349671048.png)
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349712050-1563349712055.png)
+如果你用的是 MySQL 5.7 版本，可以通过 sys.innodb_lock_waits 表查到是谁占着这个写锁。
+> mysql> select * from t sys.innodb_lock_waits where locked_table=`'test'.'t'`\G
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563349912598-1563349912629.png)
+> 解决 kill 4
+
+## 第二类：查询慢
+> mysql> select * from t where c=50000 limit 1;
+由于字段 c 上没有索引，这个语句只能走 id 主键顺序扫描，因此需要扫描 5 万行。
+
+这里为了把所有语句记录到 slow log 里，我在连接后先执行了 set long_query_time=0，将慢查询日志的时间阈值设置为 0。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563350099920-1563350099926.png)
+全表扫描 5 万行的 slow log
+
+> mysql> select * from t where id=1；
+虽然扫描行数是 1，但执行时间却长达 800 毫秒。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563350185816-1563350185824.png)
+复现：
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563350386724-1563350386734.png)
+session B 更新完 100 万次，生成了 100 万个回滚日志 (undo log)。
+
+带 lock in share mode 的 SQL 语句，是当前读，因此会直接读到 1000001 这个结果，所以速度很快；而 select * from t where id=1 这个语句，是一致性读，因此需要从 1000001 开始，依次执行 undo log，执行了 100 万次以后，才将 1 这个结果返回。
+
+## 小结
+今天我给你举了在一个简单的表上，执行“查一行”，可能会出现的被锁住和执行慢的例子。这其中涉及到了表锁、行锁和一致性读的概念。
+
+## 问题
+我们在举例加锁读的时候，用的是这个语句，select * from t where id=1 lock in share mode。由于 id 上有索引，所以可以直接定位到 id=1 这一行，因此读锁也是只加在了这一行上。
+
+但如果是下面的 SQL 语句，
+```sql
+begin;
+select * from t where c=5 for update;
+commit;
+```
+这个语句序列是怎么加锁的呢？加的锁又是什么时候释放呢？
+
+# 20 | 幻读是什么，幻读有什么问题？
+
+## 幻读是什么？
+假设一个场景，只在 id=5 这一行加行锁
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563351369274-1563351369286.png)
+其中，Q3 读到 id=1 这一行的现象，被称为“幻读”。也就是说，幻读指的是一个事务在前后两次查询同一个范围的时候，后一次查询看到了前一次查询没有看到的行。
+1. 在可重复读隔离级别下，普通的查询是快照读，是不会看到别的事务插入的数据的。因此，幻读在“当前读”下才会出现。
+2. 上面 session B 的修改结果，被 session A 之后的 select 语句用“当前读”看到，不能称为幻读。幻读仅专指“新插入的行”。
+
+## 幻读有什么问题？
+首先是语义上的。session A 在 T1 时刻就声明了，“我要把所有 d=5 的行锁住，不准别的事务进行读写操作”。而实际上，这个语义被破坏了。
+
+如果现在这样看感觉还不明显的话，我再往 session B 和 session C 里面分别加一条 SQL 语句，你再看看会出现什么现象。
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563351546471-1563351546479.png)
+假设只在 id=5 这一行加行锁 -- 语义被破坏
