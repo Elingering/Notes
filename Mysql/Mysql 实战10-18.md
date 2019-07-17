@@ -359,8 +359,12 @@ mysql> select * from t where city in ('杭州'," 苏州 ") order by name limit 1
 > 2. 执行 select * from t where city=“苏州” order by name limit 100; 用相同的方法，假设结果被存进了内存数组 B。
 > 3. 现在 A 和 B 是两个有序数组，然后你可以用归并排序的思想，得到 name 最小的前 100 值，就是我们需要的结果了。
 > 
-> 
-> 
+> 如果把这条 SQL 语句里“limit 100”改成“limit 10000,100”的话:
+> ```sql
+> select id,name from t where city=" 杭州 " order by name limit 10100; 
+> select id,name from t where city=" 苏州 " order by name limit 10100。
+> ```
+> 然后，再用归并排序的方法取得按 name 顺序第 10001~10100 的 name、id 的值，然后拿着这 100 个 id 到数据库中去查出所有记录。
 
 # 17 | 如何正确地显示随机消息？
 
