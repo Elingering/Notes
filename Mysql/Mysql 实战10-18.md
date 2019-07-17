@@ -486,6 +486,14 @@ mysql> select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tra
 ## 问题
 你遇到过类似问题吗？
 
-> 段落引用
+```sql
+mysql> CREATE TABLE `table_a` (
+  `id` int(11) NOT NULL,
+  `b` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `b` (`b`)
+) ENGINE=InnoDB;
+```
+
 
 
