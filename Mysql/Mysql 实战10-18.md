@@ -357,6 +357,8 @@ mysql> select * from t where city in ('杭州'," 苏州 ") order by name limit 1
 
 # 17 | 如何正确地显示随机消息？
 
+## 内存临时表
+
 
 # 18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
 
