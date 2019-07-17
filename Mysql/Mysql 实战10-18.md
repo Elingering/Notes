@@ -414,6 +414,8 @@ select * from t limit @Y3，1；
 
 > 这里我给出一种方法，取 Y1、Y2 和 Y3 里面最大的一个数，记为 M，最小的一个数记为 N，然后执行下面这条 SQL 语句：
 > mysql> select * from t limit N, M-N+1;
+> 再加上取整个表总行数的 C 行，这个方案的扫描行数总共只需要 C+M+1 行。
+> 当然也可以先取回 id 值，在应用中确定了三个 id 值以后，再执行三次 where id=X 的语句也是可以的。
 
 # 18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
 
@@ -478,6 +480,8 @@ alter table trade_detail modify tradeid varchar(32) CHARACTER SET utf8mb4 defaul
 mysql> select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tradeid USING utf8) and l.id=2; 
 主动把 l.tradeid 转成 utf8，就避免了被驱动表上的字符编码转换
 ```
+## 小结
+其实三个案例都是对表字段做了函数操作导致不走索引的。
 
 ## 问题
 你遇到过类似问题吗？
