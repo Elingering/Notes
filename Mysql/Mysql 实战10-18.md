@@ -412,7 +412,7 @@ select * from t limit @Y3，1；
 
 我的问题是，如果你是这个需求的开发人员，你会怎么做，来减少扫描行数呢？说说你的方案，并说明你的方案需要的扫描行数。
 
-> 段落引用
+> 
 
 # 18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
 
@@ -470,6 +470,17 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
 > utf8mb4 是 utf8 的超集。类似地，在程序设计语言里面，做自动类型转换的时候，为了避免数据在转换过程中由于截断导致数据错误，也都是“按数据长度增加的方向”进行转换的。
 
 为了避免这种隐式转换，有两种做法：
+```sql
+1. 统一查询字段的字符集
+alter table trade_detail modify tradeid varchar(32) CHARACTER SET utf8mb4 default null;
+2. 如果能够修改字段的字符集的话，是最好不过了。但如果数据量比较大， 或者业务上暂时不能做这个 DDL 的话，那就只能采用修改 SQL 语句的方法了。
+mysql> select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tradeid USING utf8) and l.id=2; 
+主动把 l.tradeid 转成 utf8，就避免了被驱动表上的字符编码转换
+```
 
+## 问题
+你遇到过类似问题吗？
+
+> 段落引用
 
 
