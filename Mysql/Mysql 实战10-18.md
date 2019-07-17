@@ -354,7 +354,10 @@ mysql> select * from t where city in ('杭州'," 苏州 ") order by name limit 1
 进一步地，如果有分页需求，要显示第 101 页，也就是说语句最后要改成 “limit 10000,100”， 你的实现方法又会是什么呢？
 
 > 需要排序。
-> 
+> 避免排序的方法：
+> 1. 执行 select * from t where city=“杭州” order by name limit 100; 这个语句是不需要排序的，客户端用一个长度为 100 的内存数组 A 保存结果。
+> 2. 执行 select * from t where city=“苏州” order by name limit 100; 用相同的方法，假设结果被存进了内存数组 B。
+> 3. 现在 A 和 B 是两个有序数组，然后你可以用归并排序的思想，得到 name 最小的前 100 值，就是我们需要的结果了。
 > 
 > 
 > 
@@ -409,4 +412,3 @@ select * from t limit @Y3，1；
 
 # 18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
 
->
