@@ -29,12 +29,36 @@ Accept: application/<API_STANDARDS_TREE>.<API_SUBTYPE>.v1+json
 ### 新建控制器基类
 ```php
 $ php artisan make:controller Api/Controller
-使用trait use Dingo\Api\Routing\Helpers;
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Dingo\Api\Routing\Helpers;
+use App\Http\Controllers\Controller as BaseController;
+
+class Controller extends BaseController
+{
+    use Helpers;
+}
 ```
 
 ## 表单验证基类
 ```php
 $ php artisan make:request Api/FormRequest
+<?php
+
+namespace App\Http\Requests\Api;
+
+use Dingo\Api\Http\FormRequest as BaseFormRequest;
+
+class FormRequest extends BaseFormRequest
+{
+    public function authorize()
+    {
+        return true;
+    }
+}
+
 ```
 
 ## 返回信息
