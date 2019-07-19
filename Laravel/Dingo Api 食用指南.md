@@ -339,6 +339,8 @@ public function index(Topic $topic, Request $request)
 - Accept-Language zh-CN —— 简体中文
 - Accept-Language en —— 英文
 
+$ composer require "overtrue/laravel-lang:~3.0"
+
 ### 增加middleware
 ```php
 $ php artisan make:middleware ChangeLocale
