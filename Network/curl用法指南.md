@@ -95,15 +95,16 @@ $ curl -F 'file=@photo.png;filename=me.png' https://google.com/profile
 
 #-G
 -G参数用来构造 URL 的查询字符串。
-
-
+```shell
 $ curl -G -d 'q=kitties' -d 'count=20' https://google.com/search
+```
 上面命令会发出一个 GET 请求，实际请求的 URL 为https://google.com/search?q=kitties&count=20。如果省略--G，会发出一个 POST 请求。
 
 如果数据需要 URL 编码，可以结合--data--urlencode参数。
+```shell
 
+```
 
-$ curl -G --data-urlencode 'comment=hello world' https://www.example.com
 -H
 -H参数添加 HTTP 请求的标头。
 
