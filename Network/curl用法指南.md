@@ -20,13 +20,13 @@ $ curl -H 'User-Agent: php/1.0' https://google.com
 
 #-b
 -b参数用来向服务器发送 Cookie。
-
-
+```shell
 $ curl -b 'foo=bar' https://google.com
+```
 上面命令会生成一个标头Cookie: foo=bar，向服务器发送一个名为foo、值为bar的 Cookie。
-
-
+```shell
 $ curl -b 'foo1=bar' -b 'foo2=baz' https://google.com
+```
 上面命令发送两个 Cookie。
 
 
