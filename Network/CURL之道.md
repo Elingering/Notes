@@ -36,6 +36,15 @@ $ curl --trace-ascii output.txt www.sina.com
 $ curl example.com/form.cgi?data=xxx
 POST方法必须把数据和网址分开，curl就要用到--data参数。
 $ curl -X POST --data "data=xxx" example.com/form.cgi
-
+如果你的数据没有经过表单编码，还可以让curl为你编码，参数是`--data-urlencode`。
+$ curl -X POST--data-urlencode "date=April 1" example.com/form.cgi
 ```
 
+#HTTP动词
+curl默认的HTTP动词是GET，使用`-X`参数可以支持其他动词。
+```shell
+$ curl -X POST www.example.com
+$ curl -X DELETE www.example.com
+```
+
+#
