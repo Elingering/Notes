@@ -3,11 +3,12 @@ $ curl https://www.example.com
 ```
 上面命令向www.example.com发出 GET 请求，服务器返回的内容会在命令行输出。
 
--A
+#-A
 -A参数指定客户端的用户代理标头，即User-Agent。curl 的默认用户代理字符串是curl/[version]。
+```shell
 
+```
 
-$ curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' https://google.com
 上面命令将User-Agent改成 Chrome 浏览器。
 
 
