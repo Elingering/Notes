@@ -102,21 +102,19 @@ $ curl -G -d 'q=kitties' -d 'count=20' https://google.com/search
 
 如果数据需要 URL 编码，可以结合--data--urlencode参数。
 ```shell
-
+$ curl -G --data-urlencode 'comment=hello world' https://www.example.com
 ```
 
--H
+#-H
 -H参数添加 HTTP 请求的标头。
-
-
+```shell
 $ curl -H 'Accept-Language: en-US' https://google.com
+```
 上面命令添加 HTTP 标头Accept-Language: en-US。
-
-
+```shell
 $ curl -H 'Accept-Language: en-US' -H 'Secret-Message: xyzzy' https://google.com
+```
 上面命令添加两个 HTTP 标头。
-
-
 $ curl -d '{"login": "emma", "pass": "123"}' -H 'Content-Type: application/json' https://google.com/login
 上面命令添加 HTTP 请求的标头是Content-Type: application/json，然后用-d参数发送 JSON 数据。
 
