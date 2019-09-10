@@ -192,7 +192,7 @@ $ curl -s -o /dev/null https://google.com
 ```
 上面命令没有任何输出，除非发生错误。
 
-#-u
+# -u
 -u参数用来设置服务器认证的用户名和密码。
 ```shell
 $ curl -u 'bob:12345' https://google.com/login
