@@ -161,19 +161,19 @@ $ curl --limit-rate 200k https://google.com
 
 #-o
 -o参数将服务器的回应保存成文件，等同于wget命令。
-
-
+```shell
 $ curl -o example.html https://www.example.com
+```
 上面命令将www.example.com保存成example.html。
 
 #-O
 -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。
-
-
+```shell
 $ curl -O https://www.example.com/foo/bar.html
+```
 上面命令将服务器回应保存成文件，文件名为bar.html。
 
--s
+#-s
 -s参数将不输出错误和进度信息。
 
 
@@ -181,10 +181,11 @@ $ curl -s https://www.example.com
 上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
 
 如果想让 curl 不产生任何输出，可以使用下面的命令。
-
-
+```shell
 $ curl -s -o /dev/null https://google.com
--S
+```
+
+#-S
 -S参数指定只输出错误信息，通常与-s一起使用。
 
 
