@@ -148,14 +148,15 @@ $ curl -k https://www.example.com
 
 #-L
 -L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。
-
-
+```shell
 $ curl -L -d 'tweet=hi' https://api.twitter.com/tweet
---limit-rate
+```
+
+#--limit-rate
 --limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境。
-
-
+```shell
 $ curl --limit-rate 200k https://google.com
+```
 上面命令将带宽限制在每秒 200K 字节。
 
 #-o
