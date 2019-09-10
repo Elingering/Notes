@@ -35,18 +35,19 @@ $ curl -b cookies.txt https://www.google.com
 
 #-c
 -c参数将服务器设置的 Cookie 写入一个文件。
-
-
+```shell
 $ curl -c cookies.txt https://www.google.com
+```
 上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt。
 
 #-d
 -d参数用于发送 POST 请求的数据体。
-
-
+```shell
 $ curl -d'login=emma＆password=123'-X POST https://google.com/login
 # 或者
 $ curl -d 'login=emma' -d 'password=123' -X POST  https://google.com/login
+```
+
 使用-d参数以后，HTTP 请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
 
 -d参数可以读取本地文本文件的数据，向服务器发送。
