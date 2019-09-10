@@ -6,20 +6,19 @@ $ curl https://www.example.com
 #-A
 -A参数指定客户端的用户代理标头，即User-Agent。curl 的默认用户代理字符串是curl/[version]。
 ```shell
-
+$ curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' https://google.com
+```
+上面命令将User-Agent改成 Chrome 浏览器。
+```shell
+$ curl -A '' https://google.com
+```
+上面命令会移除User-Agent标头。
+也可以通过-H参数直接指定标头，更改User-Agent。
+```shell
+$ curl -H 'User-Agent: php/1.0' https://google.com
 ```
 
-上面命令将User-Agent改成 Chrome 浏览器。
-
-
-$ curl -A '' https://google.com
-上面命令会移除User-Agent标头。
-
-也可以通过-H参数直接指定标头，更改User-Agent。
-
-
-$ curl -H 'User-Agent: php/1.0' https://google.com
--b
+#-b
 -b参数用来向服务器发送 Cookie。
 
 
