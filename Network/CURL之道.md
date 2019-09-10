@@ -48,3 +48,7 @@ $ curl -X DELETE www.example.com
 ```
 
 #文件上传
+假定文件上传的表单是下面这样：
+```shell
+
+```
