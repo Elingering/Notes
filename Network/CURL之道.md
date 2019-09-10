@@ -14,4 +14,10 @@ $ curl -L www.sina.com
 
 #显示头信息
 `-i`参数可以显示http response的头信息，连同网页代码一起。
+`-I`参数则是只显示http response的头信息。
+```shell
+$ curl -i www.sina.com
+```
+
+#显示通信过程
 
