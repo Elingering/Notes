@@ -221,21 +221,20 @@ $ curl --trace - https://www.example.com
 
 #-x
 -x参数指定 HTTP 请求的代理。
-```language
-
+```shell
+$ curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
 ```
-
 上面命令指定 HTTP 请求通过myproxy.com:8080的 socks5 代理发出。
 
 如果没有指定代理协议，默认为 HTTP。
-
-
+```shell
 $ curl -x james:cats@myproxy.com:8080 https://www.example.com
+```
 上面命令中，请求的代理使用 HTTP 协议。
 
--X
+#-X
 -X参数指定 HTTP 请求的方法。
-
-
+```shell
 $ curl -X POST https://www.example.com
+```
 上面命令对https://www.example.com发出 POST 请求。
