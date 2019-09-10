@@ -97,4 +97,8 @@ $ curl --header "Content-Type:application/json" http://example.com
 ```
 
 #HTTP认证
+有些网域需要HTTP认证，这时curl需要用到`--user`参数。
+```shell
+$ curl --user name:password example.com
+```
 
