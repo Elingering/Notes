@@ -76,9 +76,9 @@ curl -H 'Referer: https://google.com?q=example' https://www.example.com
 
 #-F
 -F参数用来向服务器上传二进制文件。
-
-
+```shell
 $ curl -F 'file=@photo.png' https://google.com/profile
+```
 上面命令会给 HTTP 请求加上标头Content-Type: multipart/form-data，然后将文件photo.png作为file字段上传。
 
 -F参数可以指定 MIME 类型。
@@ -93,7 +93,7 @@ $ curl -F 'file=@photo.png;type=image/png' https://google.com/profile
 $ curl -F 'file=@photo.png;filename=me.png' https://google.com/profile
 上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
 
--G
+#-G
 -G参数用来构造 URL 的查询字符串。
 
 
