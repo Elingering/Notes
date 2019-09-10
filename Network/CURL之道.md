@@ -79,3 +79,16 @@ $ curl --user-agent "[User Agent]" [URL]
 
 #cookie
 使用`--cookie`参数，可以让curl发送cookie。
+```shell
+$ curl --cookie "name=xxx" www.example.com
+```
+至于具体的cookie的值，可以从http response头信息的`Set-Cookie`字段中得到。
+
+`-c cookie-file`可以保存服务器返回的cookie到文件，`-b cookie-file`可以使用这个文件作为cookie信息，进行后续的请求。
+```shell
+$ curl -c cookies http://example.com
+$ curl -b cookies http://example.com
+```
+
+
+
