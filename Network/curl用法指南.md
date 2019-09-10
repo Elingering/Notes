@@ -28,19 +28,19 @@ $ curl -b 'foo=bar' https://google.com
 $ curl -b 'foo1=bar' -b 'foo2=baz' https://google.com
 ```
 上面命令发送两个 Cookie。
-
-
+```shell
 $ curl -b cookies.txt https://www.google.com
+```
 上面命令读取本地文件cookies.txt，里面是服务器设置的 Cookie（参见-c参数），将其发送到服务器。
 
--c
+#-c
 -c参数将服务器设置的 Cookie 写入一个文件。
 
 
 $ curl -c cookies.txt https://www.google.com
 上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt。
 
--d
+#-d
 -d参数用于发送 POST 请求的数据体。
 
 
