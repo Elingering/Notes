@@ -20,4 +20,12 @@ $ curl -i www.sina.com
 ```
 
 #显示通信过程
+`-v`参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。
+```shell
+$ curl -v www.sina.com
+如果你觉得上面的信息还不够，那么下面的命令可以查看更详细的通信过程。
+$ curl --trace output.txt www.sina.com
 
+```
+
+#
