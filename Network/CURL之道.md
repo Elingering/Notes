@@ -5,4 +5,13 @@ $ curl www.sina.com
 $ curl -o [文件名] www.sina.com
 ```
 
-#
+#自动跳转
+有的网址是自动跳转的。使用`-L`参数，curl就会跳转到新的网址。
+```shell
+$ curl -L www.sina.com
+```
+键入上面的命令，结果就自动跳转为www.sina.com.cn。
+
+#显示头信息
+`-i`参数可以显示http response的头信息，连同网页代码一起。
+
