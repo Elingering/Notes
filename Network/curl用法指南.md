@@ -132,21 +132,21 @@ $ curl -i https://www.example.com
 ```shell
 $ curl -I https://www.example.com
 ```
-
 上面命令输出服务器对 HEAD 请求的回应。
 
 --head参数等同于-I。
-
-
+```shell
 $ curl --head https://www.example.com
--k
+```
+
+#-k
 -k参数指定跳过 SSL 检测。
-
-
+```shell
 $ curl -k https://www.example.com
+```
 上面命令不会检查服务器的 SSL 证书是否正确。
 
--L
+#-L
 -L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。
 
 
@@ -158,14 +158,14 @@ $ curl -L -d 'tweet=hi' https://api.twitter.com/tweet
 $ curl --limit-rate 200k https://google.com
 上面命令将带宽限制在每秒 200K 字节。
 
--o
+#-o
 -o参数将服务器的回应保存成文件，等同于wget命令。
 
 
 $ curl -o example.html https://www.example.com
 上面命令将www.example.com保存成example.html。
 
--O
+#-O
 -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。
 
 
