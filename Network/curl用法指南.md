@@ -47,23 +47,22 @@ $ curl -d'login=emma＆password=123'-X POST https://google.com/login
 # 或者
 $ curl -d 'login=emma' -d 'password=123' -X POST  https://google.com/login
 ```
-
 使用-d参数以后，HTTP 请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
 
 -d参数可以读取本地文本文件的数据，向服务器发送。
-
-
+```shell
 $ curl -d '@data.txt' https://google.com/login
+```
 上面命令读取data.txt文件的内容，作为数据体向服务器发送。
 
---data-urlencode
+#--data-urlencode
 --data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码。
 
 
 $ curl --data-urlencode 'comment=hello world' https://google.com/login
 上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。
 
--e
+#-e
 -e参数用来设置 HTTP 的标头Referer，表示请求的来源。
 
 
@@ -74,7 +73,7 @@ curl -e 'https://google.com?q=example' https://www.example.com
 
 
 curl -H 'Referer: https://google.com?q=example' https://www.example.com
--F
+#-F
 -F参数用来向服务器上传二进制文件。
 
 
