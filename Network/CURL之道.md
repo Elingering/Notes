@@ -34,5 +34,8 @@ $ curl --trace-ascii output.txt www.sina.com
 发送表单信息有GET和POST两种方法。GET方法相对简单，只要把数据附在网址后面就行。
 ```shell
 $ curl example.com/form.cgi?data=xxx
+POST方法必须把数据和网址分开，curl就要用到--data参数。
+$ curl -X POST --data "data=xxx" example.com/form.cgi
+
 ```
 
