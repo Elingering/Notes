@@ -62,3 +62,9 @@ $ curl --form upload=@localfilename --form press=OK [URL]
 
 #Referer字段
 有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。
+```shell
+$ curl --referer http://www.example.com http://www.example.com
+```
+
+#User Agent字段
+
