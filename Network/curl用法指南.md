@@ -3,7 +3,7 @@ $ curl https://www.example.com
 ```
 上面命令向www.example.com发出 GET 请求，服务器返回的内容会在命令行输出。
 
-#-A
+# -A
 -A参数指定客户端的用户代理标头，即User-Agent。curl 的默认用户代理字符串是curl/[version]。
 ```shell
 $ curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' https://google.com
@@ -18,7 +18,7 @@ $ curl -A '' https://google.com
 $ curl -H 'User-Agent: php/1.0' https://google.com
 ```
 
-#-b
+# -b
 -b参数用来向服务器发送 Cookie。
 ```shell
 $ curl -b 'foo=bar' https://google.com
@@ -33,14 +33,14 @@ $ curl -b cookies.txt https://www.google.com
 ```
 上面命令读取本地文件cookies.txt，里面是服务器设置的 Cookie（参见-c参数），将其发送到服务器。
 
-#-c
+# -c
 -c参数将服务器设置的 Cookie 写入一个文件。
 ```shell
 $ curl -c cookies.txt https://www.google.com
 ```
 上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt。
 
-#-d
+# -d
 -d参数用于发送 POST 请求的数据体。
 ```shell
 $ curl -d'login=emma＆password=123'-X POST https://google.com/login
@@ -55,14 +55,14 @@ $ curl -d '@data.txt' https://google.com/login
 ```
 上面命令读取data.txt文件的内容，作为数据体向服务器发送。
 
-#--data-urlencode
+# --data-urlencode
 --data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码。
 ```shell
 $ curl --data-urlencode 'comment=hello world' https://google.com/login
 ```
 上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。
 
-#-e
+# -e
 -e参数用来设置 HTTP 的标头Referer，表示请求的来源。
 ```shell
 curl -e 'https://google.com?q=example' https://www.example.com
@@ -74,7 +74,7 @@ curl -e 'https://google.com?q=example' https://www.example.com
 curl -H 'Referer: https://google.com?q=example' https://www.example.com
 ```
 
-#-F
+# -F
 -F参数用来向服务器上传二进制文件。
 ```shell
 $ curl -F 'file=@photo.png' https://google.com/profile
@@ -93,7 +93,7 @@ $ curl -F 'file=@photo.png;filename=me.png' https://google.com/profile
 ```
 上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
 
-#-G
+# -G
 -G参数用来构造 URL 的查询字符串。
 ```shell
 $ curl -G -d 'q=kitties' -d 'count=20' https://google.com/search
@@ -105,7 +105,7 @@ $ curl -G -d 'q=kitties' -d 'count=20' https://google.com/search
 $ curl -G --data-urlencode 'comment=hello world' https://www.example.com
 ```
 
-#-H
+# -H
 -H参数添加 HTTP 请求的标头。
 ```shell
 $ curl -H 'Accept-Language: en-US' https://google.com
