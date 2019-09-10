@@ -90,5 +90,11 @@ $ curl -c cookies http://example.com
 $ curl -b cookies http://example.com
 ```
 
+#增加头信息
+有时需要在http request之中，自行增加一个头信息。`--header`参数就可以起到这个作用。
+```shell
+$ curl --header "Content-Type:application/json" http://example.com
+```
 
+#HTTP认证
 
