@@ -57,22 +57,23 @@ $ curl -d '@data.txt' https://google.com/login
 
 #--data-urlencode
 --data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码。
-
-
+```shell
 $ curl --data-urlencode 'comment=hello world' https://google.com/login
+```
 上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。
 
 #-e
 -e参数用来设置 HTTP 的标头Referer，表示请求的来源。
-
-
+```shell
 curl -e 'https://google.com?q=example' https://www.example.com
+```
 上面命令将Referer标头设为https://google.com?q=example。
 
 -H参数可以通过直接添加标头Referer，达到同样效果。
-
-
+```shell
 curl -H 'Referer: https://google.com?q=example' https://www.example.com
+```
+
 #-F
 -F参数用来向服务器上传二进制文件。
 
