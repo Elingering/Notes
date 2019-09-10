@@ -82,15 +82,15 @@ $ curl -F 'file=@photo.png' https://google.com/profile
 上面命令会给 HTTP 请求加上标头Content-Type: multipart/form-data，然后将文件photo.png作为file字段上传。
 
 -F参数可以指定 MIME 类型。
-
-
+```shell
 $ curl -F 'file=@photo.png;type=image/png' https://google.com/profile
+```
 上面命令指定 MIME 类型为image/png，否则 curl 会把 MIME 类型设为application/octet-stream。
 
 -F参数也可以指定文件名。
-
-
+```shell
 $ curl -F 'file=@photo.png;filename=me.png' https://google.com/profile
+```
 上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
 
 #-G
