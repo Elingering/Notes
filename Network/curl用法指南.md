@@ -120,14 +120,14 @@ $ curl -d '{"login": "emma", "pass": "123"}' -H 'Content-Type: application/json'
 ```
 上面命令添加 HTTP 请求的标头是Content-Type: application/json，然后用-d参数发送 JSON 数据。
 
-#-i
+# -i
 -i参数打印出服务器回应的 HTTP 标头。
 ```shell
 $ curl -i https://www.example.com
 ```
 上面命令收到服务器回应后，先输出服务器回应的标头，然后空一行，再输出网页的源码。
 
-#-I
+# -I
 -I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来。
 ```shell
 $ curl -I https://www.example.com
@@ -139,41 +139,41 @@ $ curl -I https://www.example.com
 $ curl --head https://www.example.com
 ```
 
-#-k
+# -k
 -k参数指定跳过 SSL 检测。
 ```shell
 $ curl -k https://www.example.com
 ```
 上面命令不会检查服务器的 SSL 证书是否正确。
 
-#-L
+# -L
 -L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。
 ```shell
 $ curl -L -d 'tweet=hi' https://api.twitter.com/tweet
 ```
 
-#--limit-rate
+# --limit-rate
 --limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境。
 ```shell
 $ curl --limit-rate 200k https://google.com
 ```
 上面命令将带宽限制在每秒 200K 字节。
 
-#-o
+# -o
 -o参数将服务器的回应保存成文件，等同于wget命令。
 ```shell
 $ curl -o example.html https://www.example.com
 ```
 上面命令将www.example.com保存成example.html。
 
-#-O
+# -O
 -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。
 ```shell
 $ curl -O https://www.example.com/foo/bar.html
 ```
 上面命令将服务器回应保存成文件，文件名为bar.html。
 
-#-s
+# -s
 -s参数将不输出错误和进度信息。
 ```shell
 $ curl -s https://www.example.com
@@ -185,7 +185,7 @@ $ curl -s https://www.example.com
 $ curl -s -o /dev/null https://google.com
 ```
 
-#-S
+# -S
 -S参数指定只输出错误信息，通常与-s一起使用。
 ```shell
 $ curl -s -o /dev/null https://google.com
@@ -209,7 +209,7 @@ $ curl -u 'bob' https://google.com/login
 ```
 上面命令只设置了用户名，执行后，curl 会提示用户输入密码。
 
-#-v
+# -v
 -v参数输出通信的整个过程，用于调试。
 ```shell
 $ curl -v https://www.example.com
@@ -219,7 +219,7 @@ $ curl -v https://www.example.com
 $ curl --trace - https://www.example.com
 ```
 
-#-x
+# -x
 -x参数指定 HTTP 请求的代理。
 ```shell
 $ curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
@@ -232,7 +232,7 @@ $ curl -x james:cats@myproxy.com:8080 https://www.example.com
 ```
 上面命令中，请求的代理使用 HTTP 协议。
 
-#-X
+# -X
 -X参数指定 HTTP 请求的方法。
 ```shell
 $ curl -X POST https://www.example.com
