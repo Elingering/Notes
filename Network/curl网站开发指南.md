@@ -47,7 +47,7 @@ $ curl -X POST www.example.com
 $ curl -X DELETE www.example.com
 ```
 
-#文件上传
+# 文件上传
 假定文件上传的表单是下面这样：
 ```shell
 <form method="POST" enctype='multipart/form-data' action="upload.cgi">
@@ -60,13 +60,13 @@ $ curl -X DELETE www.example.com
 $ curl --form upload=@localfilename --form press=OK [URL]
 ```
 
-#Referer字段
+# Referer字段
 有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。
 ```shell
 $ curl --referer http://www.example.com http://www.example.com
 ```
 
-#User Agent字段
+# User Agent字段
 这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。
 iPhone4的User Agent是
 ```language
@@ -77,7 +77,7 @@ curl可以这样模拟：
 $ curl --user-agent "[User Agent]" [URL]
 ```
 
-#cookie
+# cookie
 使用`--cookie`参数，可以让curl发送cookie。
 ```shell
 $ curl --cookie "name=xxx" www.example.com
@@ -90,13 +90,13 @@ $ curl -c cookies http://example.com
 $ curl -b cookies http://example.com
 ```
 
-#增加头信息
+# 增加头信息
 有时需要在http request之中，自行增加一个头信息。`--header`参数就可以起到这个作用。
 ```shell
 $ curl --header "Content-Type:application/json" http://example.com
 ```
 
-#HTTP认证
+# HTTP认证
 有些网域需要HTTP认证，这时curl需要用到`--user`参数。
 ```shell
 $ curl --user name:password example.com
