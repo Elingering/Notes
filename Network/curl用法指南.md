@@ -204,25 +204,27 @@ curl 能够识别 URL 里面的用户名和密码。
 $ curl https://bob:12345@google.com/login
 ```
 上面命令能够识别 URL 里面的用户名和密码，将其转为上个例子里面的 HTTP 标头。
-
-
+```shell
 $ curl -u 'bob' https://google.com/login
+```
 上面命令只设置了用户名，执行后，curl 会提示用户输入密码。
 
 #-v
 -v参数输出通信的整个过程，用于调试。
-
-
+```shell
 $ curl -v https://www.example.com
+```
 --trace参数也可以用于调试，还会输出原始的二进制数据。
-
-
+```shell
 $ curl --trace - https://www.example.com
+```
+
 #-x
 -x参数指定 HTTP 请求的代理。
+```language
 
+```
 
-$ curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
 上面命令指定 HTTP 请求通过myproxy.com:8080的 socks5 代理发出。
 
 如果没有指定代理协议，默认为 HTTP。
