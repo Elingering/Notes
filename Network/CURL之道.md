@@ -50,5 +50,15 @@ $ curl -X DELETE www.example.com
 #文件上传
 假定文件上传的表单是下面这样：
 ```shell
-
+<form method="POST" enctype='multipart/form-data' action="upload.cgi">
+　　　　<input type=file name=upload>
+　　　　<input type=submit name=press value="OK">
+　　</form>
 ```
+你可以用curl这样上传文件：
+```shell
+$ curl --form upload=@localfilename --form press=OK [URL]
+```
+
+#Referer字段
+有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。
