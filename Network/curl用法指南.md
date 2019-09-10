@@ -115,21 +115,24 @@ $ curl -H 'Accept-Language: en-US' https://google.com
 $ curl -H 'Accept-Language: en-US' -H 'Secret-Message: xyzzy' https://google.com
 ```
 上面命令添加两个 HTTP 标头。
+```shell
 $ curl -d '{"login": "emma", "pass": "123"}' -H 'Content-Type: application/json' https://google.com/login
+```
 上面命令添加 HTTP 请求的标头是Content-Type: application/json，然后用-d参数发送 JSON 数据。
 
--i
+#-i
 -i参数打印出服务器回应的 HTTP 标头。
-
-
+```shell
 $ curl -i https://www.example.com
+```
 上面命令收到服务器回应后，先输出服务器回应的标头，然后空一行，再输出网页的源码。
 
--I
+#-I
 -I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来。
-
-
+```shell
 $ curl -I https://www.example.com
+```
+
 上面命令输出服务器对 HEAD 请求的回应。
 
 --head参数等同于-I。
