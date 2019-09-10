@@ -25,7 +25,14 @@ $ curl -i www.sina.com
 $ curl -v www.sina.com
 如果你觉得上面的信息还不够，那么下面的命令可以查看更详细的通信过程。
 $ curl --trace output.txt www.sina.com
-
+或者
+$ curl --trace-ascii output.txt www.sina.com
+运行后，请打开output.txt文件查看。
 ```
 
-#
+#发送表单信息
+发送表单信息有GET和POST两种方法。GET方法相对简单，只要把数据附在网址后面就行。
+```shell
+$ curl example.com/form.cgi?data=xxx
+```
+
