@@ -67,4 +67,15 @@ $ curl --referer http://www.example.com http://www.example.com
 ```
 
 #User Agent字段
+这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。
+iPhone4的User Agent是
+```language
+Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7
+```
+curl可以这样模拟：
+```shell
+$ curl --user-agent "[User Agent]" [URL]
+```
 
+#cookie
+使用`--cookie`参数，可以让curl发送cookie。
