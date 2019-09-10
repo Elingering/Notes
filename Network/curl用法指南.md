@@ -175,9 +175,9 @@ $ curl -O https://www.example.com/foo/bar.html
 
 #-s
 -s参数将不输出错误和进度信息。
-
-
+```shell
 $ curl -s https://www.example.com
+```
 上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
 
 如果想让 curl 不产生任何输出，可以使用下面的命令。
@@ -187,9 +187,9 @@ $ curl -s -o /dev/null https://google.com
 
 #-S
 -S参数指定只输出错误信息，通常与-s一起使用。
-
-
+```shell
 $ curl -s -o /dev/null https://google.com
+```
 上面命令没有任何输出，除非发生错误。
 
 -u
