@@ -7,7 +7,7 @@ MySQL 的逻辑架构图
 ```sql
 mysql -h$ip -P$port -u$user -p
 ```
-- 使用 show processlist 命令查看连接状态
+- 使用 show processlist 命令查看连接状态 sleep 标示空闲
 - 自动关闭 sleep 连接，wait_timeout 默认8小时
 - 也有长连接和短连接。长连接耗内存，解决办法：
 1. 定期断开长连接。使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连。如果你用的是。
