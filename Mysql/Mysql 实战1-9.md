@@ -208,7 +208,7 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 ==所以，哈希表这种结构适用于只有等值查询的场景，比如 Memcached 及其他一些 NoSQL 引擎。==
 
 - 有序数组
-有序数组在等值查询和范围查询场景中的性能就都非常优秀。
+有序数组在==等值查询和范围查==询场景中的性能就都非常优秀。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562910944478-1562910944487.png?token=AFRM336VXVLAFXZGS564FZK5FAQSC)
 候如果你要查 ID_card_n2 对应的名字，用二分法就可以快速得到，这个时间复杂度是 O(log(N))。
 
