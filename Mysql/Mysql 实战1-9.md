@@ -212,9 +212,9 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562910944478-1562910944487.png?token=AFRM336VXVLAFXZGS564FZK5FAQSC)
 候如果你要查 ID_card_n2 对应的名字，用二分法就可以快速得到，这个时间复杂度是 O(log(N))。
 
-如果仅仅看查询效率，有序数组就是最好的数据结构了。但是，在需要更新数据的时候就麻烦了，你往中间插入一个记录就必须得挪动后面所有的记录，成本太高。
+如果仅仅看查询效率，有序数组就是最好的数据结构了。但是，在需要==更新数据的==时候就麻烦了，你往中间插入一个记录就必须得挪动后面所有的记录，==成本太高==。
 
-所以，**有序数组索引只适用于静态存储引擎**，比如你要保存的是 2017 年某个城市的所有人口信息，这类不会再修改的数据。
+所以，**有序数组索引只适用于静态存储引擎**，比如你要保存的是 2017 年某个城市的所有人口信息，这类==不会再修改的数据==。
 
 - 二叉树
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562911072622-1562911072647.png?token=AFRM333U4TMJ5MFSUZN4JSS5FAQ2A)
