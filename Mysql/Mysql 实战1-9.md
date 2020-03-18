@@ -335,7 +335,7 @@ select * from T where k between 3 and 5
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562920527312-1562920527321.png?token=AFRM332SRPVVTNFXJKLESCK5FBDI6)
 "where name = ‘张三’" 和 "where name like ‘张 %’"都能用上这个索引。
 
-可以看到，不只是索引的全部定义，只要满足最左前缀，就可以利用索引来加速检索。这个最左前缀可以是联合索引的最左 N 个字段，也可以是字符串索引的最左 M 个字符。
+可以看到，不只是索引的全部定义，只要满足最左前缀，就可以利用索引来加速检索。这个最左前缀可以是联合索引的==最左 N 个字段==，也可以是字符串索引的==最左 M 个字符==。
 
 讨论一个问题：在建立联合索引的时候，如何安排索引内的字段顺序？
 这里我们的评估标准是，索引的复用能力。
