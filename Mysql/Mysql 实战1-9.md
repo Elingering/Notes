@@ -401,7 +401,7 @@ select * from geek where c=N order by b limit 1;
 在可重复读隔离级别下开启一个事务，也可以做全库备份，但是需要引擎支持这个隔离级别。
 
 ## 表级锁
-MySQL 里面表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)。
+MySQL 里面表级别的锁有两种：一种是==表锁==，一种是==元数据锁==（meta data lock，MDL)。
 
 表锁的语法是 lock tables … read/write。与 FTWRL 类似，可以用 unlock tables 主动释放锁，也可以在客户端断开的时候自动释放。需要注意，lock tables 语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。
 
