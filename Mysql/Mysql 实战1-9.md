@@ -201,7 +201,7 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 
 不可避免地，多个 key 值经过哈希函数的换算，会出现同一个值的情况。处理这种情况的一种方法是，拉出一个链表。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/12/1562910823827-1562910823836.png?token=AFRM33ZZSMHUKCZNVC3PX225FAQKQ)
-需要注意的是，图中四个 ID_card_n 的值并不是递增的，这样做的好处是增加新的 User 时速度会很快，只需要往后追加。但缺点是，因为不是有序的，所以哈希索引做区间查询的速度是很慢的。
+需要注意的是，图中四个 ID_card_n 的值并不是递增的，这样做的好处是==增加新的 User 时速度会很快==，只需要往后追加。但缺点是，因为不是有序的，所以哈希索引做==区间查询的速度是很慢==的。
 
 你可以设想下，如果你现在要找身份证号在 [ID_card_X, ID_card_Y] 这个区间的所有用户，就必须全部扫描一遍了。
 
