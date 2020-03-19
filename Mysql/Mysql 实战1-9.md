@@ -640,7 +640,7 @@ insert into t(id, c) values(1,1),(2,2),(3,3),(4,4);
 change buffer 用的是 buffer pool 里的内存，因此不能无限增大。change buffer 的大小，可以通过参数 innodb_change_buffer_max_size 来动态设置。这个参数设置为 50 的时候，表示 change buffer 的大小最多只能占用 buffer pool 的 50%。
 
 ## change buffer 的使用场景
-对于写多读少的业务来说，页面在写完以后马上被访问到的概率比较小，此时 change buffer 的使用效果最好。这种业务模型常见的就是账单类、日志类的系统。
+==对于写多读少的业务来说==，页面在写完以后马上被访问到的概率比较小，此时 ==change buffer 的使用效果最好==。这种业务模型常见的就是账单类、日志类的系统。
 
 反过来，假设一个业务的更新模式是写入之后马上会做查询，那么即使满足了条件，将更新先记录在 change buffer，但之后由于马上要访问这个数据页，会立即触发 merge 过程。这样随机访问 IO 的次数不会减少，反而增加了 change buffer 的维护代价。所以，对于这种业务模式来说，change buffer 反而起到了副作用。
 
