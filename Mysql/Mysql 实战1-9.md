@@ -635,7 +635,7 @@ insert into t(id, c) values(1,1),(2,2),(3,3),(4,4);
 
 显然，如果能够将更新操作先记录在 change buffer，减少读磁盘，语句的执行速度会得到明显的提升。而且，数据读入内存是需要占用 buffer pool 的，所以这种方式还能够避免占用内存，提高内存利用率。
 
-唯一索引的更新就不能使用 change buffer，实际上也只有普通索引可以使用。
+==唯一索引的更新就不能使用 change buffer，实际上也只有普通索引可以使用。==
 
 change buffer 用的是 buffer pool 里的内存，因此不能无限增大。change buffer 的大小，可以通过参数 innodb_change_buffer_max_size 来动态设置。这个参数设置为 50 的时候，表示 change buffer 的大小最多只能占用 buffer pool 的 50%。
 
