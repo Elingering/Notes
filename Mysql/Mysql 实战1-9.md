@@ -650,7 +650,7 @@ change buffer 用的是 buffer pool 里的内存，因此不能无限增大。ch
 如果所有的更新后面，都马上伴随着对这个记录的查询，那么你应该关闭 change buffer。而在其他情况下，change buffer 都能提升更新性能。
 
 ## change buffer 和 redo log
-redo log 主要节省的是随机写磁盘的 IO 消耗（随机写磁盘转成顺序写redo log），而 change buffer 主要节省的则是随机读磁盘的 IO 消耗(写操作不用先读数据页到内存)。
+==redo log 主要节省的是随机写磁盘的 IO 消耗（随机写磁盘转成顺序写redo log），而 change buffer 主要节省的则是随机读磁盘的 IO 消耗(写操作不用先读数据页到内存)。==
 
 ## 小结
 由于唯一索引用不上 change buffer 的优化机制，因此如果业务可以接受，从性能角度出发我建议你优先考虑非唯一索引。
