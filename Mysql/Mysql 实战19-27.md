@@ -118,3 +118,7 @@ commit;
 
 ## 问题
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/gitnote/2020/03/22/Snipaste_2020-03-22_14-40-34-1584860159587.png)
+
+# 21 | 为什么我只改一行的语句，锁这么多
+
+# 22 | MySQL有哪些“饮鸩止渴”提高性能的方法
