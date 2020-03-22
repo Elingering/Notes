@@ -117,3 +117,4 @@ commit;
 ==如果把隔离级别设置为读提交的话，就没有间隙锁了。但同时，你要解决可能出现的数据和日志不一致问题，需要把binlog格式设置为row。==
 
 ## 问题
+![title](https://raw.githubusercontent.com/Elingering/note-images/master/gitnote/2020/03/22/Snipaste_2020-03-22_14-40-34-1584860159587.png)
