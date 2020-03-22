@@ -301,6 +301,8 @@ select @b-@a;
 这个方法是通过查看 OPTIMIZER_TRACE 的结果来确认的，你可以从 number_of_tmp_files 中看到是否使用了临时文件。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563330192734-1563330192738.png)
 
+内存放不下时，就需要使用外部排序，外部排序一般使用==归并排序算法==。可以这么简单理解，==MySQL将需要排序的数据分成x份，每一份单独排序后存在这些临时文件中。然后把这x个有序文件再合并成一个有序的大文件。==
+
 ## rowid 排序
 如果 MySQL 认为排序的单行长度太大会怎么做呢？
 
@@ -384,7 +386,7 @@ mysql> select word from words order by rand() limit 3;
 7. 排序完成后，取出前三个结果的位置信息，依次到内存临时表中取出 word 值，返回给客户端。这个过程中，访问了表的三行数据，总扫描行数变成了 20003。
 
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563340009915-1563340009942.png)
-order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。
+==order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。==
 
 ## 磁盘临时表
 那么，是不是所有的临时表都是内存表呢？
@@ -422,13 +424,14 @@ select * from t limit @Y3，1；
 # 18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
 
 ## 案例一：条件字段函数操作
-对索引字段做函数操作，可能会破坏索引值的有序性，因此优化器就决定放弃走树搜索功能。
+==对索引字段做函数操作，可能会破坏索引值的有序性，因此优化器就决定放弃走树搜索功能。==
 
 需要注意的是，优化器并不是要放弃使用这个索引。
 
 在这个例子里，放弃了树搜索功能，优化器可以选择遍历主键索引，也可以选择遍历索引 t_modified，优化器对比索引大小后发现，索引 t_modified 更小，遍历这个索引比遍历主键索引来得更快。因此最终还是会选择索引 t_modified。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563344507966-1563344507978.png)
 由于加了 month() 函数操作，MySQL 无法再使用索引快速定位功能，而只能使用全索引扫描。
+==Extra字段的Using index，表示的是使用了覆盖索引。==
 
 ## 案例二：隐式类型转换
 在 MySQL 中，字符串和数字做比较的话，是将==字符串==转换成==数字==。
@@ -484,6 +487,7 @@ mysql> select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tra
 ```
 ## 小结
 其实三个案例都是对表字段做了函数操作导致不走索引的。
+==索引字段不能进行函数操作，但是索引字段的参数可以玩函数，一言以蔽之==
 
 ## 问题
 你遇到过类似问题吗？
