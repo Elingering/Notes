@@ -97,4 +97,4 @@ commit;
 
 如果现在这样看感觉还不明显的话，我再往 session B 和 session C 里面分别加一条 SQL 语句，你再看看会出现什么现象。
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563351546471-1563351546479.png)
-假设只在 id=5 这一行加行锁 -- 语义被破坏
+三个查询都是加了==for update，都是当前读==。而当前读的规则，就是要==能读到所有已经提交的记录的最新值==。
