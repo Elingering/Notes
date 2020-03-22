@@ -67,7 +67,7 @@ call idata();
 ![title](https://raw.githubusercontent.com/Elingering/note-images/master/note-images/2019/07/17/1563350386724-1563350386734.png)
 session B 更新完 100 万次，生成了 100 万个回滚日志 (undo log)。
 
-带 lock in share mode 的 SQL 语句，是当前读，因此会直接读到 1000001 这个结果，所以速度很快；而 select * from t where id=1 这个语句，是一致性读，因此需要从 1000001 开始，依次执行 undo log，执行了 100 万次以后，才将 1 这个结果返回。
+==带 lock in share mode 的 SQL 语句，是当前读==，因此会直接读到 1000001 这个结果，所以速度很快；而 select * from t where id=1 这个语句，是一致性读，因此需要从 1000001 开始，依次执行 undo log，执行了 100 万次以后，才将 1 这个结果返回。
 
 ## 小结
 今天我给你举了在一个简单的表上，执行“查一行”，可能会出现的被锁住和执行慢的例子。这其中涉及到了表锁、行锁和一致性读的概念。
