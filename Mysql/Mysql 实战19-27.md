@@ -188,8 +188,11 @@ binlog的写入逻辑比较简单：事务执行过程中，先把日志写到bi
 
 ==用binlog来恢复数据的标准做法==是，用 mysqlbinlog工具解析出来，然后把解析结果整个发给MySQL执行。类似下面的命令：
 ```sql
-
+mysqlbinlog master.000001  --start-position=2738 --stop-position=2973 | mysql -h127.0.0.1 -P13000 -u$user -p$pwd;
 ```
+这个命令的意思是，将 master.000001 文件里面从第2738字节到第2973字节中间这段内容解析出来，放到MySQL去执行。
+
+## 循环复制问题
 
 
 
