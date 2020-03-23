@@ -180,7 +180,9 @@ binlog的写入逻辑比较简单：事务执行过程中，先把日志写到bi
 因为readonly设置对超级(super)权限用户是无效的，而用于同步更新的线程，就拥有超级权限。
 
 ## binlog的三种格式对比
-
+因为有些statement格式的binlog可能会导致主备不一致，所以要使用row格式。
+但row格式的缺点是，很占空间。比如你用一个delete语句删掉10万行数据，用statement的话就是一个SQL语句被记录到binlog中，占用几十个字节的空间。但如果用row格式的binlog，就要把这10万条记录都写到binlog中。这样做，不仅会占用更大的空间，同时写binlog也要耗费IO资源，影响执行速度。
+所以，MySQL就取了个折中方案，也就是有了mixed格式的binlog。mixed格式的意思是，MySQL自己会判断这条SQL语句是否可能引起主备不一致，如果有可能，就用row格式，否则就用statement格式。
 
 
 # 25 | MySQL是怎么保证高可用的
