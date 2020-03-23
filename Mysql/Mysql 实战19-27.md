@@ -200,7 +200,8 @@ mysqlbinlog master.000001  --start-position=2738 --stop-position=2973 | mysql -h
 3. 每个库在收到从自己的主库发过来的日志后，先判断server id，如果跟自己的相同，表示这个日志是自己生成的，就直接丢弃这个日志。
 
 # 25 | MySQL是怎么保证高可用的
-## 
+## 主备延迟
+
 
 # 26 | 备库为什么会延迟好几个小时
 
