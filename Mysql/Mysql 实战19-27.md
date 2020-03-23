@@ -151,6 +151,9 @@ commit;
 # 23 | MySQL是怎么保证数据不丢的
 
 ## binlog的写入机制
+binlog的写入逻辑比较简单：事务执行过程中，先把日志写到binlog cache，事务提交的时候，再把binlog cache写到binlog文件中。
+
+一个事务的binlog是不能被拆开的，因此不论这个事务多大，也要确保一次性写入。
 
 
 # 24 | MySQL是怎么保证主备一致的
