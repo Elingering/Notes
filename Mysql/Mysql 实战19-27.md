@@ -193,6 +193,7 @@ mysqlbinlog master.000001  --start-position=2738 --stop-position=2973 | mysql -h
 这个命令的意思是，将 master.000001 文件里面从第2738字节到第2973字节中间这段内容解析出来，放到MySQL去执行。
 
 ## 循环复制问题
+节点A和B之间总是互为主备关系。这样在切换的时候就不用再修改主备关系。
 
 
 
