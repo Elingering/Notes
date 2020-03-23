@@ -272,3 +272,5 @@ coordinator在分发的时候，需要满足以下这两个基本要求：
 ## 基于位点的主备切换
 ## GTID
 ## 基于GTID的主备切换
+GTID模式的启动也很简单，我们只需要在启动一个MySQL实例的时候，加上参数gtid_mode=on和enforce_gtid_consistency=on就可以了。
+
