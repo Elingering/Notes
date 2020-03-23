@@ -225,6 +225,7 @@ mysqlbinlog master.000001  --start-position=2738 --stop-position=2973 | mysql -h
 ## 可靠性优先策略
 
 ## 可用性优先策略
+有没有哪种情况数据的可用性优先级更高呢？
 
 
 # 26 | 备库为什么会延迟好几个小时
