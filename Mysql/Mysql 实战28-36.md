@@ -42,8 +42,14 @@ MySQL 5.6版本以后提供的performance_schema库，就在file_summary_by_even
 mysql> update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/io/file/innodb/innodb_log_file%';
 ```
 你可以通过MAX_TIMER的值来判断数据库是否出问题了。比如，你可以设定阈值，单次IO请求时间超过200毫秒属于异常，然后使用类似下面这条语句作为检测逻辑。
-
-
+```sql
+mysql> select event_name,MAX_TIMER_WAIT  FROM performance_schema.file_summary_by_event_name where event_name in ('wait/io/file/innodb/innodb_log_file','wait/io/file/sql/binlog') and MAX_TIMER_WAIT>200*1000000000;
+```
+发现异常后，取到你需要的信息，再通过下面这条语句：
+```sql
+mysql> truncate table performance_schema.file_summary_by_event_name;
+```
+把之前的统计信息清空。这样如果后面的监控中，再次出现这个异常，就可以加入监控累积值了。
 
 ## 小结
 我个人比较倾向的方案，是优先考虑update系统表，然后再配合增加检测performance_schema的信息。
