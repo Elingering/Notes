@@ -33,6 +33,8 @@ mysql> CREATE TABLE `health_check` (
 insert into mysql.health_check(id, t_modified) values (@@server_id, now()) on duplicate key update t_modified=now();
 ```
 - 内部统计
+MySQL 5.6版本以后提供的performance_schema库，就在file_summary_by_event_name表里统计了每次IO请求的时间。
+
 
 ## 小结
 我个人比较倾向的方案，是优先考虑update系统表，然后再配合增加检测performance_schema的信息。
