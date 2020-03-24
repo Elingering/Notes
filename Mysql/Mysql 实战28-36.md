@@ -35,6 +35,11 @@ insert into mysql.health_check(id, t_modified) values (@@server_id, now()) on du
 - 内部统计
 MySQL 5.6版本以后提供的performance_schema库，就在file_summary_by_event_name表里统计了每次IO请求的时间。
 
+	我的测试结果是，如果打开所有的performance_schema项，性能大概会下降10%左右。所以，我建议你只打开自己需要的项进行统计。你可以通过下面的方法打开或者关闭某个具体项的统计。
+
+	如果要打开redo log的时间监控，你可以执行这个语句：
+
+
 
 ## 小结
 我个人比较倾向的方案，是优先考虑update系统表，然后再配合增加检测performance_schema的信息。
