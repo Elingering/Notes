@@ -18,11 +18,21 @@
 ==在线程进入锁等待以后，并发线程的计数会减一==
 
 ## 判断方法
-select 1判断
-查表判断
-更新判断
-内部统计
+- select 1判断
+- 查表判断
+- 更新判断
+为了让主备之间的更新不产生冲突，我们可以在mysql.health_check表上存入多行数据，并用A、B的server_id做主键。
+```sql
+mysql> CREATE TABLE `health_check` (
+  `id` int(11) NOT NULL,
+  `t_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 
+/* 检测命令 */
+insert into mysql.health_check(id, t_modified) values (@@server_id, now()) on duplicate key update t_modified=now();
+```
+- 内部统计
 
 ## 小结
 我个人比较倾向的方案，是优先考虑update系统表，然后再配合增加检测performance_schema的信息。
