@@ -38,6 +38,10 @@ MySQL 5.6版本以后提供的performance_schema库，就在file_summary_by_even
 	我的测试结果是，如果打开所有的performance_schema项，性能大概会下降10%左右。所以，我建议你只打开自己需要的项进行统计。你可以通过下面的方法打开或者关闭某个具体项的统计。
 
 	如果要打开redo log的时间监控，你可以执行这个语句：
+```sql
+mysql> update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/io/file/innodb/innodb_log_file%';
+```
+你可以通过MAX_TIMER的值来判断数据库是否出问题了。比如，你可以设定阈值，单次IO请求时间超过200毫秒属于异常，然后使用类似下面这条语句作为检测逻辑。
 
 
 
