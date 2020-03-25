@@ -148,5 +148,13 @@ select t1.b,t2.* from  t2  straight_join t1 on (t1.b=t2.b) where t2.id<=100;
 
 - 而临时表，可以使用各种引擎类型 。如果是使用InnoDB引擎或者MyISAM引擎的临时表，写数据的时候是写到磁盘上的。当然，临时表也可以使用Memory引擎。
 
+## 临时表的特性
+表语法是create temporary table …。
 
+一个临时表只能被创建它的session访问，对其他线程不可见。所以，图中session A创建的临时表t，对于session B就是不可见的。
 
+临时表可以与普通表同名。
+
+session A内有同名的临时表和普通表的时候，show create语句，以及增删改查语句访问的是临时表。
+
+show tables命令不显示临时表。
