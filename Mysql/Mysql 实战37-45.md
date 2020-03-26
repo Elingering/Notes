@@ -98,6 +98,8 @@ insert into t2(c,d) select c,d from t;
 ```
 需要对表t的所有行和间隙加锁，防止主备不一致。
 
+## insert 循环写入
+当然了，执行insert … select 的时候，对目标表也不是锁全表，而是只锁住需要访问的资源（limit）。
 
 
 # 41 | 为什么临时表可以重名
