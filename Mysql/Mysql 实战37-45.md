@@ -139,6 +139,7 @@ select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
 后两种方式都是逻辑备份方式，是可以跨引擎使用的。
 
 # 42 | grant之后要跟着flushprivileges吗
+## 全局权限
 
 
 
