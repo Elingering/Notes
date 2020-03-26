@@ -122,6 +122,9 @@ select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
 ```
 
 ## 物理拷贝方法
+在MySQL 5.6版本引入了可传输表空间(transportable tablespace)的方法，可以通过导出+导入表空间的方式，实现物理拷贝表的功能。
+
+## 小结
 
 
 # 42 | 为什么临时表可以重名
