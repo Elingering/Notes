@@ -93,7 +93,12 @@ MySQL的优化器一看，磁盘临时表是B+树存储，存储效率不如数�
 
 ## insert … select 语句
 在可重复读隔离级别下，binlog_format=statement时：
-需要对表t的所有行和间隙加锁，f
+```sql
+insert into t2(c,d) select c,d from t;
+```
+需要对表t的所有行和间隙加锁，防止主备不一致。
+
+
 
 # 41 | 为什么临时表可以重名
 # 42 | 为什么临时表可以重名
