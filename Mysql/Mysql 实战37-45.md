@@ -140,7 +140,7 @@ select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
 
 # 42 | grant之后要跟着flushprivileges吗
 ## 全局权限
-
+一般在生产环境上要合理控制用户权限的范围。我们上面用到的这个grant语句就是一个典型的错误示范。如果一个用户有所有权限，一般就不应该设置为所有IP地址都可以访问。
 
 
 # 43 | 为什么临时表可以重名
