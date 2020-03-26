@@ -19,6 +19,14 @@ group by的语义逻辑，是统计不同的值出现的个数。但是，由于
 
 那么，如果扫描过程中可以保证出现的数据是有序的，是不是就简单了呢？
 
+在MySQL 5.7版本支持了generated column机制，用来实现列数据的关联更新。你可以用下面的方法创建一个列z，然后在z列上创建一个索引（如果是MySQL 5.6及之前的版本，你也可以创建普通列和索引，来解决这个问题）。
+```sql
+alter table t1 add column z int generated always as(id % 100), add index(z);
+```
+
+## group by优化方法 --直接排序
+
+
 
 
 # 38 | 为什么临时表可以重名
