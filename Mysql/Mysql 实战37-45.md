@@ -146,7 +146,9 @@ select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
 grant修改db权限的时候，是同时对磁盘和内存生效的。
 
 ## 表权限和列权限
+跟db权限类似，这两个权限每次grant的时候都会修改数据表，也会同步修改内存中的hash结构。因此，对这两类权限的操作，也会马上影响到已经存在的连接。
 
+==正常情况下，grant命令之后，没有必要跟着执行flush privileges命令。==
 
 
 # 43 | 为什么临时表可以重名
