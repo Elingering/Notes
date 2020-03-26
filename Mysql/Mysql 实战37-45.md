@@ -110,6 +110,10 @@ insert 语句如果出现唯一键冲突，会在冲突的唯一值上加共享�
 
 # 41 | 怎么最快地复制一张表
 ## mysqldump方法
+一种方法是，使用mysqldump命令将数据导出成一组INSERT语句。你可以使用下面的命令：
+```sql
+mysqldump -h$host -P$port -u$user --add-locks --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where="a>900" --result-file=/client_tmp/t.sql
+```
 
 
 # 42 | 为什么临时表可以重名
