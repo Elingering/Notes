@@ -25,6 +25,10 @@ alter table t1 add column z int generated always as(id % 100), add index(z);
 ```
 
 ## group by优化方法 --直接排序
+在group by语句中加入SQL_BIG_RESULT这个提示（hint），就可以告诉优化器：这个语句涉及的数据量很大，请直接用磁盘临时表。
+
+MySQL的优化器一看，磁盘临时表是B+树存储，存储效率不如数组来得高。所以，既然你告诉我数据量很大，那从磁盘空间考虑，还是直接用数组来存吧。
+
 
 
 
