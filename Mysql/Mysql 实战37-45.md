@@ -34,7 +34,11 @@ MySQL的优化器一看，磁盘临时表是B+树存储，存储效率不如数�
 2. join_buffer是无序数组，sort_buffer是有序数组，临时表是二维表结构；
 3. 如果执行逻辑需要用到二维表特性，就会优先考虑使用临时表。比如我们的例子中，union需要用到唯一索引约束， group by还需要用到另外一个字段来存累积计数。
 
-xiao
+## 小结
+1. 如果对group by语句的结果没有排序要求，要在语句后面加 order by null；
+2. 尽量让group by过程用上表的索引，确认方法是explain结果里没有Using temporary 和 Using filesort；
+3. 如果group by需要统计的数据量不大，尽量只使用内存临时表；也可以通过适当调大tmp_table_size参数，来避免用到磁盘临时表；
+4. 如果数据量实在太大，使用SQL_BIG_RESULT这个提示，来告诉优化器直接使用排序算法得到group by的结果。
 
 
 # 38 | 为什么临时表可以重名
