@@ -16,7 +16,8 @@ slowlog reset
 只能运行在一个节点
 
 # 发布订阅
-
+publish channel message #返回订阅者个数
+subscribe [channel]
 
 # Bitmap
 
