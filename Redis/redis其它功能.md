@@ -29,9 +29,10 @@ bitcount key [start end] #获取位图指定范围（字节）位置为1的个�
 bitop op destkey key [key] #做多个Bitmap的and（交）、or（并）、not（非）、xor（异或）操作，并将结果保存在destkey中
 bitops key targetBit [start] [end] #计算位图指定范围（字节）第一个偏移量对应的值等于他让个人Bit的位置
 
-场景：独立用户统计
+场景：独立数量统计
 
 # HyperLogLog
-
+1. 基于HyperLogLog算法：极小空间完成独立数量统计
+2. 本质还是字符串
 
 # GEO
