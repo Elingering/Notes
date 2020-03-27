@@ -23,3 +23,5 @@ dir /bigdiskpath
 stop-writes-on-bgsave-error yes
 rdbcompression yes #压缩
 rdbchecksum yes #
+
+## 触发方式
