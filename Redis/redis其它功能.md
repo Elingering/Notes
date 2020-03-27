@@ -45,3 +45,5 @@ pfmerge destkey sourcekey [sourcekey...] #合并
 2. 无法取出单条数据
 
 # GEO
+地理位置信息：存储经纬度，计算两地距离，范围计算等
+
