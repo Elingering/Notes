@@ -41,6 +41,7 @@ pfcount key [key..] #计算独立总数
 pfmerge destkey sourcekey [sourcekey...] #合并
 
 缺点：
-1. 
+1. count 错误率0.81%
+2. 无法取出单条数据
 
 # GEO
