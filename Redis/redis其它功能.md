@@ -21,7 +21,7 @@ subscribe [channel ...]
 unsubscribe [channel ...]
 
 # Bitmap
-
+位图：字符串
 
 # HyperLogLog
 
