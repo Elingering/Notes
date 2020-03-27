@@ -49,4 +49,5 @@ pfmerge destkey sourcekey [sourcekey...] #合并
 
 ## API
 geoadd key longitude latitude member
-ge
+geopos key member
+geodist key member1 member2 [unit] #
