@@ -3,3 +3,10 @@
 写日志：MySQL Binlog；AOF
 
 # RDB
+以二进制形式，完整保存redis内容
+
+触发机制：
+1. save
+2. 
+2. bgsave
+3. 自动
