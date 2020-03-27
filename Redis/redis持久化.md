@@ -21,5 +21,5 @@
 dbfilename dump-${port}.rdb
 dir /bigdiskpath
 stop-writes-on-bgsave-error yes
-rdbcompression yes
-rdbchecksum yes
+rdbcompression yes #压缩
+rdbchecksum yes #
