@@ -23,6 +23,8 @@ unsubscribe [channel ...]
 # Bitmap
 位图：字符串对应的二进制
 
+setbit key offset value
+
 
 # HyperLogLog
 
