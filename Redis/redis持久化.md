@@ -18,4 +18,8 @@
 	- 如：60秒更新1000次
 
 ## 最佳配置
-dbfilename dump-
+dbfilename dump-${port}.rdb
+dir /bigdiskpath
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
