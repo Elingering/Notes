@@ -48,4 +48,4 @@ pfmerge destkey sourcekey [sourcekey...] #合并
 地理位置信息：存储经纬度，计算两地距离，范围计算等
 
 ## API
-geo key longitud
+geo key longitude latitude member
