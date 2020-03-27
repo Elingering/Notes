@@ -25,8 +25,8 @@ unsubscribe [channel ...]
 
 setbit key offset value
 getbit key offset
-bitcount key [start end] #获取位图指定范围位置为1
-bitop 
+bitcount key [start end] #获取位图指定范围（字节）位置为1的个数
+bitop op destkey key [key]
 
 # HyperLogLog
 
