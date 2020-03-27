@@ -46,6 +46,7 @@ pfmerge destkey sourcekey [sourcekey...] #合并
 
 # GEO
 地理位置信息：存储经纬度，计算两地距离，范围计算等
+实际是zset类型
 
 ## API
 geoadd key longitude latitude member
