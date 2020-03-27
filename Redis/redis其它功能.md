@@ -50,4 +50,5 @@ pfmerge destkey sourcekey [sourcekey...] #合并
 ## API
 geoadd key longitude latitude member
 geopos key member
-geodist key member1 member2 [unit] #
+geodist key member1 member2 [unit] #m（米）、km（千米）、mi（英里）、ft（尺）
+georadius key longitude latitude 
