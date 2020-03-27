@@ -27,6 +27,7 @@ setbit key offset value
 getbit key offset
 bitcount key [start end] #获取位图指定范围（字节）位置为1的个数
 bitop op destkey key [key] #做多个Bitmap的and（交）、or（并）、not（非）、xor（异或）操作，并将结果保存在destkey中
+bitops key targetBit [start] [end]
 
 # HyperLogLog
 
