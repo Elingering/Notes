@@ -25,8 +25,9 @@ rdbcompression yes #压缩
 rdbchecksum yes #
 
 ## 触发方式
-1. 全量复制
+1. 全量复制（主从复制）
 2. debug reload
 3. shutdown
 
+# AOF
 
