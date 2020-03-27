@@ -25,6 +25,7 @@ unsubscribe [channel ...]
 
 setbit key offset value
 getbit key offset
+bitcount key [start end]
 
 # HyperLogLog
 
