@@ -36,8 +36,8 @@ bitops key targetBit [start] [end] #计算位图指定范围（字节）第一�
 2. 本质还是字符串
 
 pfadd key element [element...]
-pfcount key [key..]
-pfmerge destkey sourcekey [sourcekey...]
+pfcount key [key..] #计算独立总数
+pfmerge destkey sourcekey [sourcekey...] #合并
 
 
 # GEO
