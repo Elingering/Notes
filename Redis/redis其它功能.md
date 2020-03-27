@@ -40,5 +40,7 @@ pfadd key element [element...]
 pfcount key [key..] #计算独立总数
 pfmerge destkey sourcekey [sourcekey...] #合并
 
+缺点：
+1. 
 
 # GEO
