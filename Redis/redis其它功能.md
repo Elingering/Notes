@@ -34,6 +34,7 @@ bitops key targetBit [start] [end] #计算位图指定范围（字节）第一�
 # HyperLogLog
 1. 基于HyperLogLog算法：极小空间完成独立数量统计
 2. 本质还是字符串
+3. 不重复
 
 pfadd key element [element...]
 pfcount key [key..] #计算独立总数
