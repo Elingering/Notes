@@ -30,4 +30,7 @@ rdbchecksum yes #
 3. shutdown
 
 # AOF
-
+RDB缺点：
+1. 耗时、耗性能
+	- 
+2. 不可控、丢失数据
