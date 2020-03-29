@@ -47,6 +47,5 @@ no：系统决定
 加速恢复速度
 
 ##　AOF重写的两种方式
-ｂｇｒｅｗｒ
 bgrewriteaof
 AOF重写配置
