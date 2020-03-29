@@ -42,3 +42,4 @@ always:每条命令都fsync到硬盘
 everysec:每秒fsync到硬盘
 no：系统决定
 
+##　ＡＯＦ重写
