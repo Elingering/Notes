@@ -33,5 +33,7 @@ rdbchecksum yes #
 RDB缺点：
 1. 耗时、耗性能
 	- O(n)
-	- fork()
+	- fork()耗内存
+	- 写盘I/O
 2. 不可控、丢失数据
+	- 
