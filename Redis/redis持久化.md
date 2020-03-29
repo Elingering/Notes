@@ -38,5 +38,7 @@ RDB缺点：
 2. 不可控、丢失数据
 
 ## 策略
-always:
-every
+always:每条命令都fsync到硬盘
+everysec:每秒fsync到硬盘
+no：系统决定
+
