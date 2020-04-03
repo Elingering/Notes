@@ -58,3 +58,5 @@ info：latest_fork_usec
 ## 改善fork
 优先使用物理机或者高效支持fork操作的虚拟化技术
 控制redis实例最大可用内存：maxmemory
+合理配置Linux内存分配策略：vm.overcommit_memory=1
+降低fork频率：例如
