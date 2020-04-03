@@ -66,4 +66,5 @@ AOF重写配置
 	- 开销：RDB和AOF文件生成，属于cpu密集型
 	- 优化：不做cpu绑定，不和cpu密集型部署
 2. 内存
-	- 开销：
+	- 开销：fork内存开销，copy-on-write
+	- 优化：echo 
