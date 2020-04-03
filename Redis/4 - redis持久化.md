@@ -73,6 +73,6 @@ AOF重写配置
 	- 优化：不要和高硬盘负载服务部署：存储服务，消息队列。。。；no-appendfsync-on-rewrite=yes；使用ssd；单机多实例持久化文件目录可以考虑分盘
 
 ## AOF追加阻塞
-#image#
+#image#![title](https://raw.githubusercontent.com/Elingering/note-images/master/gitnote/2020/04/03/Snipaste_2020-04-03_16-52-27-1585905260332.png)
 每秒刷盘策略可能不止丢失一秒的数据，也可能是两秒。优化硬盘I/O
 
