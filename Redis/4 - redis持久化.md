@@ -61,4 +61,7 @@ AOF重写配置
 3. 合理配置Linux内存分配策略：vm.overcommit_memory=1
 4. 降低fork频率：例如放宽AOF重写自动触发时机，不必要的全量复制
 
-##
+## 子进程开销和优化
+1. cpu
+	- 开销：RDB和AOF文件生成，属于cpu密集型
+	- 优化：不做cpu绑定，
