@@ -51,12 +51,14 @@ bgrewriteaof
 AOF重写配置
 
 ## fork操作
-同步操作
-于内存量息息相关
-info：latest_fork_usec
+1. 同步操作
+2. 于内存量息息相关
+3. info：latest_fork_usec
 
 ## 改善fork
-优先使用物理机或者高效支持fork操作的虚拟化技术
-控制redis实例最大可用内存：maxmemory
-合理配置Linux内存分配策略：vm.overcommit_memory=1
-降低fork频率：例如
+1. 优先使用物理机或者高效支持fork操作的虚拟化技术
+2. 控制redis实例最大可用内存：maxmemory
+3. 合理配置Linux内存分配策略：vm.overcommit_memory=1
+4. 降低fork频率：例如放宽AOF重写自动触发时机，不必要的全量复制
+
+##
