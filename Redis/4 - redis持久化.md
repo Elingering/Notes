@@ -52,4 +52,8 @@ AOF重写配置
 
 ## fork操作
 同步操作
-于内存量
+于内存量息息相关
+info：latest_fork_usec
+
+## 改善fork
+优先使用物理机
