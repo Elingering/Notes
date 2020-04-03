@@ -69,4 +69,5 @@ AOF重写配置
 	- 开销：fork内存开销，copy-on-write
 	- 优化：echo never > /sys/kernel/mm/transparent_hugepage/enabled
 3. 硬盘
-	- 开销：AOF和RDB文件
+	- 开销：AOF和RDB文件写入，可以结合iostat，iotop分析
+	- 优化：不要和高硬盘负载服务部署：存储
