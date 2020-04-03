@@ -49,3 +49,7 @@ no：系统决定
 ##　AOF重写的两种方式
 bgrewriteaof
 AOF重写配置
+
+## fork操作
+同步操作
+于内存量
